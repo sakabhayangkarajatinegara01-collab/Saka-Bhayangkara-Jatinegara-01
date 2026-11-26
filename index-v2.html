@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saka Bhayangkara Jatinegara</title>
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Saka Bhayangkara Jatinegara">
+    <meta property="og:description" content="Wadah pembinaan Pramuka Penegak dan Pandega di bidang kebhayangkaraan - Polsek Metro Jatinegara.">
+    <meta property="og:type" content="website">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome untuk Ikon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #0f172a;
+            --accent-color: #b45309;
+        }
+        .bg-theme-primary { background-color: var(--primary-color) !important; }
+        .text-theme-primary { color: var(--primary-color) !important; }
+        .bg-theme-accent { background-color: var(--accent-color) !important; }
+        .text-theme-accent { color: var(--accent-color) !important; }
+        .border-theme-accent { border-color: var(--accent-color) !important; }
+        .admin-editable-highlight { outline: 2px dashed #f59e0b; outline-offset: 4px; cursor: pointer; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased">
+
+    <!-- NAVBAR -->
+    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md shadow-sm border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <img id="site-logo-img" src="" alt="Logo" class="w-12 h-12 rounded-full object-cover shadow hidden">
+                <div id="site-logo-fallback" class="w-12 h-12 bg-theme-primary text-white rounded-full flex items-center justify-center font-bold text-lg shadow">
+                    SB
+                </div>
+                <div>
+                    <h1 id="site-title" class="font-bold text-lg sm:text-xl text-slate-900 leading-tight">Saka Bhayangkara Jatinegara</h1>
+                    <p id="site-subtitle" class="text-xs text-slate-500">Polsek Metro Jatinegara</p>
+                </div>
+            </div>
+            <nav class="hidden md:flex items-center space-x-7 font-medium text-sm">
+                <a href="#beranda" class="hover:text-theme-accent transition">Beranda</a>
+                <a href="#tentang" class="hover:text-theme-accent transition">Tentang</a>
+                <a href="#krida" class="hover:text-theme-accent transition">Krida</a>
+                <a href="#struktur" class="hover:text-theme-accent transition">Pengurus</a>
+                <a href="#galeri" class="hover:text-theme-accent transition">Galeri</a>
+                <a href="#kontak" class="bg-theme-accent text-white px-4 py-2 rounded-lg shadow hover:opacity-90 transition">Daftar Anggota</a>
+            </nav>
+            <div class="flex items-center gap-2">
+                <button id="floating-admin-btn" onclick="window.location.hash='#admin'" class="hidden bg-amber-600 text-white text-xs font-semibold px-3 py-2 rounded-lg shadow hover:bg-amber-700 transition">
+                    <i class="fa-solid fa-pen-to-square mr-1"></i> Edit Situs
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section id="beranda" class="relative bg-theme-primary text-white py-24 sm:py-32 overflow-hidden">
+        <img id="hero-bg-img" src="" alt="Hero Background" class="absolute inset-0 w-full h-full object-cover opacity-25 hidden">
+        <div class="absolute inset-0 opacity-30 bg-[radial-gradient(#38bdf8_1px,transparent_1px)] [background-size:16px_16px]"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+            <span id="hero-badge" class="bg-white/10 text-amber-300 text-xs sm:text-sm font-semibold px-4 py-1.5 rounded-full border border-white/20">Pramuka Saka Bhayangkara</span>
+            <h2 id="hero-heading" class="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight mt-5 mb-6 whitespace-pre-line">Satuan Karya Pramuka
+Bhayangkara Jatinegara</h2>
+            <p id="hero-subtext" class="max-w-2xl mx-auto text-base sm:text-lg text-slate-200 mb-8">Wadah pembinaan bagi Pramuka Penegak dan Pandega dalam bidang kebhayangkaraan guna menciptakan keamanan dan ketertiban masyarakat.</p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="#kontak" class="bg-theme-accent hover:opacity-90 text-white font-semibold px-6 py-3 rounded-xl shadow-lg transition">Gabung Sekarang</a>
+                <a href="#tentang" class="bg-white/10 hover:bg-white/20 text-white font-semibold px-6 py-3 rounded-xl border border-white/20 transition">Pelajari Lebih Lanjut</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- TENTANG KAMI & VISI MISI -->
+    <section id="tentang" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h3 class="text-theme-accent font-semibold text-sm uppercase tracking-wider">Profil Organisasi</h3>
+                <h2 class="text-3xl font-bold text-slate-900 mt-1">Tentang Kami</h2>
+                <div class="w-16 h-1 bg-theme-accent mx-auto mt-4 rounded-full"></div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
+                <div>
+                    <h4 class="text-xl font-bold text-slate-900 mb-4">Siapa Kami?</h4>
+                    <p id="about-desc-1" class="text-slate-600 leading-relaxed mb-4">Saka Bhayangkara adalah wadah pengembangan penataran, pengetahuan, dan keterampilan khusus di bidang kebhayangkaraan. Kami dibina langsung oleh Polsek Metro Jatinegara untuk membentuk generasi muda yang taat hukum, disiplin, dan memiliki jiwa sosial tinggi.</p>
+                    <p id="about-desc-2" class="text-slate-600 leading-relaxed">Melalui latihan rutin, anggota dilatih dalam hal pengaturan lalu lintas, tempat kejadian perkara (TKP) awal, penanggulangan bencana, serta bela diri.</p>
+                </div>
+                <div class="bg-slate-50 p-8 rounded-2xl border border-slate-200 shadow-sm">
+                    <h4 class="text-lg font-bold text-slate-900 mb-3"><i class="fa-solid fa-eye text-theme-accent mr-2"></i> Visi</h4>
+                    <p id="visi-text" class="text-slate-700 text-sm leading-relaxed mb-6">Mewujudkan generasi muda pramuka yang disiplin, cerdas, terampil, sadar hukum, dan tanggap terhadap keamanan ketertiban masyarakat.</p>
+                    <h4 class="text-lg font-bold text-slate-900 mb-3"><i class="fa-solid fa-bullseye text-theme-accent mr-2"></i> Misi</h4>
+                    <ul id="misi-list" class="space-y-2.5 text-slate-700 text-sm">
+                        <li class="flex items-start"><i class="fa-solid fa-check text-theme-accent mt-1 mr-3"></i><span>Mewujudkan kader bangsa yang cerdas, terampil, dan sadar hukum.</span></li>
+                        <li class="flex items-start"><i class="fa-solid fa-check text-theme-accent mt-1 mr-3"></i><span>Meningkatkan peran aktif pramuka dalam menciptakan keamanan lingkungan.</span></li>
+                        <li class="flex items-start"><i class="fa-solid fa-check text-theme-accent mt-1 mr-3"></i><span>Mengembangkan krida-krida kebhayangkaraan secara profesional.</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- KRIDA & KEGIATAN -->
+    <section id="krida" class="py-20 bg-slate-50 border-t border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h3 class="text-theme-accent font-semibold text-sm uppercase tracking-wider">Krida Kebhayangkaraan</h3>
+                <h2 class="text-3xl font-bold text-slate-900 mt-1">4 Krida Utama & Agenda</h2>
+                <div class="w-16 h-1 bg-theme-accent mx-auto mt-4 rounded-full"></div>
+            </div>
+            <div id="krida-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                    <div class="w-12 h-12 bg-amber-100 text-theme-accent rounded-xl flex items-center justify-center mb-4 text-xl"><i class="fa-solid fa-traffic-light"></i></div>
+                    <h4 class="font-bold text-slate-900 mb-2">Krida Lantas</h4>
+                    <p class="text-sm text-slate-600">Pengetahuan dan keterampilan pengaturan lalu lintas serta keselamatan berkendara.</p>
+                </div>
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                    <div class="w-12 h-12 bg-amber-100 text-theme-accent rounded-xl flex items-center justify-center mb-4 text-xl"><i class="fa-solid fa-shield-halved"></i></div>
+                    <h4 class="font-bold text-slate-900 mb-2">Krida Tibmas</h4>
+                    <p class="text-sm text-slate-600">Ketertiban masyarakat, pengamanan lingkungan, dan kesadaran hukum.</p>
+                </div>
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                    <div class="w-12 h-12 bg-amber-100 text-theme-accent rounded-xl flex items-center justify-center mb-4 text-xl"><i class="fa-solid fa-magnifying-glass"></i></div>
+                    <h4 class="font-bold text-slate-900 mb-2">Krida TPTKP</h4>
+                    <p class="text-sm text-slate-600">Tindakan Pertama di Tempat Kejadian Perkara dan pengamanan barang bukti awal.</p>
+                </div>
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                    <div class="w-12 h-12 bg-amber-100 text-theme-accent rounded-xl flex items-center justify-center mb-4 text-xl"><i class="fa-solid fa-kit-medical"></i></div>
+                    <h4 class="font-bold text-slate-900 mb-2">Krida P2B</h4>
+                    <p class="text-sm text-slate-600">Pencegahan dan Penanggulangan Bencana, SAR dasar, dan pertolongan pertama.</p>
+                </div>
+            </div>
+
+            <!-- Jadwal Latihan -->
+            <div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm flex flex-col md:flex-row items-center justify-between gap-6">
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-wider text-theme-accent">Jadwal Latihan Rutin</span>
+                    <h4 id="jadwal-hari" class="text-xl font-bold text-slate-900 mt-1">Setiap Hari Minggu, Pukul 08.00 - 12.00 WIB</h4>
+                    <p id="jadwal-lokasi" class="text-sm text-slate-600 mt-1"><i class="fa-solid fa-location-dot text-theme-accent mr-1"></i> Halaman Mapolsek Metro Jatinegara, Jakarta Timur</p>
+                </div>
+                <a href="#kontak" class="shrink-0 bg-theme-primary text-white px-5 py-3 rounded-xl text-sm font-semibold hover:opacity-90 transition">Ikut Latihan</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- STRUKTUR PENGURUS -->
+    <section id="struktur" class="py-20 bg-white border-t border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h3 class="text-theme-accent font-semibold text-sm uppercase tracking-wider">Kepengurusan</h3>
+                <h2 class="text-3xl font-bold text-slate-900 mt-1">Struktur Dewan Saka & Pimpinan</h2>
+                <div class="w-16 h-1 bg-theme-accent mx-auto mt-4 rounded-full"></div>
+            </div>
+            <div id="pengurus-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Diisi otomatis dari data default / admin -->
+            </div>
+        </div>
+    </section>
+
+    <!-- GALERI KEGIATAN -->
+    <section id="galeri" class="py-20 bg-slate-50 border-t border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h3 class="text-theme-accent font-semibold text-sm uppercase tracking-wider">Dokumentasi</h3>
+                <h2 class="text-3xl font-bold text-slate-900 mt-1">Galeri Kegiatan</h2>
+                <div class="w-16 h-1 bg-theme-accent mx-auto mt-4 rounded-full"></div>
+            </div>
+            <div id="galeri-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Diisi otomatis dari data default / admin -->
+            </div>
+        </div>
+    </section>
+
+    <!-- KONTAK & PENDAFTARAN -->
+    <section id="kontak" class="py-20 bg-white border-t border-slate-200">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl font-bold text-slate-900 mb-4">Bergabung Bersama Kami</h2>
+            <p class="text-slate-600 mb-8">Terbuka bagi Pramuka Penegak dan Pandega di wilayah Kecamatan Jatinegara dan sekitarnya.</p>
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+                <a id="gform-link" href="https://forms.google.com" target="_blank" class="inline-flex items-center gap-2 bg-theme-accent hover:opacity-90 text-white font-semibold px-8 py-4 rounded-xl shadow-lg transition">
+                    <i class="fa-solid fa-file-signature"></i> Isi Formulir Pendaftaran (Google Form)
+                </a>
+                <a id="wa-link" href="https://wa.me/6281234567890" target="_blank" class="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-8 py-4 rounded-xl shadow-lg transition">
+                    <i class="fa-brands fa-whatsapp text-lg"></i> Hubungi Humas (WhatsApp)
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-theme-primary text-slate-300 py-12 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p id="footer-copy" class="text-sm">&copy; 2026 Saka Bhayangkara Jatinegara. All rights reserved.</p>
+            <div class="flex space-x-5 text-lg">
+                <a id="ig-link" href="https://instagram.com" target="_blank" class="hover:text-white transition"><i class="fa-brands fa-instagram"></i></a>
+                <a id="fb-link" href="https://facebook.com" target="_blank" class="hover:text-white transition"><i class="fa-brands fa-facebook"></i></a>
+                <a id="yt-link" href="https://youtube.com" target="_blank" class="hover:text-white transition"><i class="fa-brands fa-youtube"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ===================================================================== -->
+    <!-- ADMIN PANEL LENGKAP (MODAL / DRAWER)                                  -->
+    <!-- ===================================================================== -->
+    <div id="admin-modal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-2 sm:p-4">
+        
+        <!-- BOX LOGIN PIN -->
+        <div id="auth-box" class="bg-white w-full max-w-md p-6 rounded-2xl shadow-2xl">
+            <div class="flex items-center gap-3 mb-3">
+                <div class="w-10 h-10 bg-amber-100 text-amber-700 rounded-xl flex items-center justify-center"><i class="fa-solid fa-lock"></i></div>
+                <div>
+                    <h3 class="text-lg font-bold text-slate-900">Mode Admin Situs</h3>
+                    <p class="text-xs text-slate-500">Masukkan PIN untuk mengedit konten sebelum ekspor HTML</p>
+                </div>
+            </div>
+            <input type="password" id="admin-pin" placeholder="PIN Default: 12345" class="w-full px-4 py-2.5 border border-slate-300 rounded-xl mb-4 text-sm focus:outline-none focus:ring-2 focus:ring-amber-600">
+            <div class="flex justify-end gap-2">
+                <button id="close-auth" class="px-4 py-2 bg-slate-200 text-slate-700 text-sm font-medium rounded-xl hover:bg-slate-300">Batal</button>
+                <button id="submit-pin" class="px-5 py-2 bg-amber-600 text-white text-sm font-semibold rounded-xl hover:bg-amber-700">Masuk Panel</button>
+            </div>
+        </div>
+
+        <!-- BOX DASHBOARD EDITOR LENGKAP -->
+        <div id="dashboard-box" class="bg-white w-full max-w-4xl rounded-2xl shadow-2xl hidden flex flex-col max-h-[92vh]">
+            <!-- Header Panel -->
+            <div class="flex justify-between items-center px-6 py-4 border-b border-slate-200 bg-slate-50 rounded-t-2xl">
+                <div>
+                    <h3 class="text-lg font-bold text-slate-900"><i class="fa-solid fa-sliders text-amber-600 mr-2"></i> Editor Situs Lengkap (Live Preview)</h3>
+                    <p class="text-xs text-slate-500">Ubah konten di bawah, klik <b>Terapkan ke Situs</b> untuk melihat hasil, lalu <b>Download index.html</b> untuk diunggah ke GitHub.</p>
+                </div>
+                <button id="close-dashboard" class="text-slate-400 hover:text-slate-700 p-2"><i class="fa-solid fa-xmark text-xl"></i></button>
+            </div>
+
+            <!-- Tab Navigasi Admin -->
+            <div class="flex overflow-x-auto border-b border-slate-200 px-6 bg-white text-xs sm:text-sm font-semibold">
+                <button onclick="switchAdminTab('tab-identitas')" class="admin-tab-btn border-b-2 border-amber-600 text-amber-700 py-3 px-4 whitespace-nowrap" data-tab="tab-identitas">1. Identitas & Tema</button>
+                <button onclick="switchAdminTab('tab-profil')" class="admin-tab-btn border-b-2 border-transparent text-slate-500 hover:text-slate-800 py-3 px-4 whitespace-nowrap" data-tab="tab-profil">2. Profil & Visi Misi</button>
+                <button onclick="switchAdminTab('tab-pengurus')" class="admin-tab-btn border-b-2 border-transparent text-slate-500 hover:text-slate-800 py-3 px-4 whitespace-nowrap" data-tab="tab-pengurus">3. Struktur Pengurus</button>
+                <button onclick="switchAdminTab('tab-galeri')" class="admin-tab-btn border-b-2 border-transparent text-slate-500 hover:text-slate-800 py-3 px-4 whitespace-nowrap" data-tab="tab-galeri">4. Galeri Foto</button>
+                <button onclick="switchAdminTab('tab-tautan')" class="admin-tab-btn border-b-2 border-transparent text-slate-500 hover:text-slate-800 py-3 px-4 whitespace-nowrap" data-tab="tab-tautan">5. Tautan & Jadwal</button>
+            </div>
+
+            <!-- Isi Form Admin (Scrollable) -->
+            <div class="p-6 overflow-y-auto space-y-6 text-sm flex-1">
+                
+                <!-- TAB 1: IDENTITAS & TEMA -->
+                <div id="tab-identitas" class="admin-tab-content space-y-4">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="font-semibold text-slate-700 block mb-1">Nama Organisasi (Header)</label>
+                            <input type="text" id="inp-title" class="w-full px-3 py-2 border rounded-lg">
+                        </div>
+                        <div>
+                            <label class="font-semibold text-slate-700 block mb-1">Subjudul (Keterangan Polsek/Kwarran)</label>
+                            <input type="text" id="inp-subtitle" class="w-full px-3 py-2 border rounded-lg">
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="font-semibold text-slate-700 block mb-1">Unggah Logo Organisasi (PNG/JPG)</label>
+                            <input type="file" id="inp-logo-file" accept="image/*" class="w-full text-xs border rounded-lg p-1.5 bg-slate-50">
+                        </div>
+                        <div>
+                            <label class="font-semibold text-slate-700 block mb-1">Unggah Background Hero (Opsional)</label>
+                            <input type="file" id="inp-hero-file" accept="image/*" class="w-full text-xs border rounded-lg p-1.5 bg-slate-50">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="font-semibold text-slate-700 block mb-1">Judul Utama Beranda (Hero Heading)</label>
+                        <textarea id="inp-hero-heading" class="w-full px-3 py-2 border rounded-lg" rows="2"></textarea>
+                    </div>
+                    <div>
+                        <label class="font-semibold text-slate-700 block mb-1">Deskripsi Singkat Beranda</label>
+                        <textarea id="inp-hero-subtext" class="w-full px-3 py-2 border rounded-lg" rows="2"></textarea>
+                    </div>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 pt-2">
+                        <div>
+                            <label class="font-semibold text-slate-700 block mb-1">Warna Utama (Header/Footer)</label>
+                            <input type="color" id="inp-primary-color" value="#0f172a" class="w-full h-10 rounded cursor-pointer border">
+                        </div>
+                        <div>
+                            <label class="font-semibold text-slate-700 block mb-1">Warna Aksen (Tombol/Ikon)</label>
+                            <input type="color" id="inp-accent-color" value="#b45309" class="w-full h-10 rounded cursor-pointer border">
+                        </div>
+                        <div>
+                            <label class="font-semibold text-slate-700 block mb-1">Ganti PIN Admin</label>
+                            <input type="text" id="inp-new-pin" value="12345" class="w-full px-3 py-2 border rounded-lg">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB 2: PROFIL & VISI MISI -->
+                <div id="tab-profil" class="admin-tab-content hidden space-y-4">
+                    <div>
+                        <label class="font-semibold text-slate-700 block mb-1">Paragraf Tentang Kami 1</label>
+                        <textarea id="inp-about-1" class="w-full px-3 py-2 border rounded-lg" rows="3"></textarea>
+                    </div>
+                    <div>
+                        <label class="font-semibold text-slate-700 block mb-1">Paragraf Tentang Kami 2</label>
+                        <textarea id="inp-about-2" class="w-full px-3 py-2 border rounded-lg" rows="3"></textarea>
+                    </div>
+                    <div>
+                        <label class="font-semibold text-slate-700 block mb-1">Visi Organisasi</label>
+                        <textarea id="inp-visi" class="w-full px-3 py-2 border rounded-lg" rows="2"></textarea>
+                    </div>
+                    <div>
+                        <label class="font-semibold text-slate-700 block mb-1">Misi Organisasi (Pisahkan setiap poin dengan baris baru / Enter)</label>
+                        <textarea id="inp-misi" class="w-full px-3 py-2 border rounded-lg" rows="4"></textarea>
+                    </div>
+                </div>
+
+                <!-- TAB 3: STRUKTUR PENGURUS -->
+                <div id="tab-pengurus" class="admin-tab-content hidden space-y-4">
+                    <div class="flex justify-between items-center">
+                        <span class="font-semibold text-slate-700">Daftar Pengurus & Pimpinan Saka</span>
+                        <button type="button" onclick="addPengurusRow()" class="px-3 py-1.5 bg-amber-600 text-white text-xs rounded-lg hover:bg-amber-700">+ Tambah Pengurus</button>
+                    </div>
+                    <div id="admin-pengurus-list" class="space-y-3"></div>
+                </div>
+
+                <!-- TAB 4: GALERI FOTO -->
+                <div id="tab-galeri" class="admin-tab-content hidden space-y-4">
+                    <div class="flex justify-between items-center">
+                        <span class="font-semibold text-slate-700">Dokumentasi Kegiatan (Bisa Upload Foto Langsung)</span>
+                        <button type="button" onclick="addGaleriRow()" class="px-3 py-1.5 bg-amber-600 text-white text-xs rounded-lg hover:bg-amber-700">+ Tambah Foto</button>
+                    </div>
+                    <div id="admin-galeri-list" class="space-y-3"></div>
+                </div>
+
+                <!-- TAB 5: TAUTAN & JADWAL -->
+                <div id="tab-tautan" class="admin-tab-content hidden space-y-4">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="font-semibold text-slate-700 block mb-1">Hari & Jam Latihan Rutin</label>
+                            <input type="text" id="inp-jadwal-hari" class="w-full px-3 py-2 border rounded-lg">
+                        </div>
+                        <div>
+                            <label class="font-semibold text-slate-700 block mb-1">Lokasi Latihan</label>
+                            <input type="text" id="inp-jadwal-lokasi" class="w-full px-3 py-2 border rounded-lg">
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="font-semibold text-slate-700 block mb-1">Link Google Form Pendaftaran</label>
+                            <input type="url" id="inp-gform" class="w-full px-3 py-2 border rounded-lg">
+                        </div>
+                        <div>
+                            <label class="font-semibold text-slate-700 block mb-1">Link WhatsApp Humas (https://wa.me/...)</label>
+                            <input type="url" id="inp-wa" class="w-full px-3 py-2 border rounded-lg">
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        <div>
+                            <label class="font-semibold text-slate-700 block mb-1">Link Instagram</label>
+                            <input type="url" id="inp-ig" class="w-full px-3 py-2 border rounded-lg">
+                        </div>
+                        <div>
+                            <label class="font-semibold text-slate-700 block mb-1">Link Facebook</label>
+                            <input type="url" id="inp-fb" class="w-full px-3 py-2 border rounded-lg">
+                        </div>
+                        <div>
+                            <label class="font-semibold text-slate-700 block mb-1">Link YouTube</label>
+                            <input type="url" id="inp-yt" class="w-full px-3 py-2 border rounded-lg">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="font-semibold text-slate-700 block mb-1">Teks Hak Cipta Footer</label>
+                        <input type="text" id="inp-footer" class="w-full px-3 py-2 border rounded-lg">
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Footer Panel Admin (Aksi Utama) -->
+            <div class="px-6 py-4 border-t border-slate-200 bg-slate-50 rounded-b-2xl flex flex-wrap justify-between items-center gap-3">
+                <button type="button" id="reset-default-btn" class="px-3 py-2 text-xs text-rose-600 hover:bg-rose-50 rounded-lg font-medium">Reset ke Default</button>
+                <div class="flex flex-wrap gap-2">
+                    <button type="button" id="apply-preview-btn" class="px-4 py-2 bg-emerald-600 text-white text-sm rounded-xl hover:bg-emerald-700 font-semibold shadow-sm">
+                        <i class="fa-solid fa-check mr-1"></i> Terapkan Perubahan
+                    </button>
+                    <button type="button" id="download-github-html" class="px-5 py-2 bg-slate-900 text-white text-sm rounded-xl hover:bg-slate-800 font-semibold shadow">
+                        <i class="fa-brands fa-github mr-1.5"></i> Download index.html (Siap Upload)
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===================================================================== -->
+    <!-- DATA STATE & SCRIPT PENGELOLA SITUS                                   -->
+    <!-- ===================================================================== -->
+    <script id="site-data-script">
+        // State Default yang otomatis tertanam ke file HTML saat di-download
+        window.INITIAL_SITE_DATA = {
+            pin: "12345",
+            primaryColor: "#0f172a",
+            accentColor: "#b45309",
+            logoBase64: "",
+            heroBgBase64: "",
+            title: "Saka Bhayangkara Jatinegara",
+            subtitle: "Polsek Metro Jatinegara",
+            heroHeading: "Satuan Karya Pramuka\nBhayangkara Jatinegara",
+            heroSubtext: "Wadah pembinaan bagi Pramuka Penegak dan Pandega dalam bidang kebhayangkaraan guna menciptakan keamanan dan ketertiban masyarakat.",
+            about1: "Saka Bhayangkara adalah wadah pengembangan penataran, pengetahuan, dan keterampilan khusus di bidang kebhayangkaraan. Kami dibina langsung oleh Polsek Metro Jatinegara untuk membentuk generasi muda yang taat hukum, disiplin, dan memiliki jiwa sosial tinggi.",
+            about2: "Melalui latihan rutin, anggota dilatih dalam hal pengaturan lalu lintas, tempat kejadian perkara (TKP) awal, penanggulangan bencana, serta bela diri.",
+            visi: "Mewujudkan generasi muda pramuka yang disiplin, cerdas, terampil, sadar hukum, dan tanggap terhadap keamanan ketertiban masyarakat.",
+            misi: [
+                "Mewujudkan kader bangsa yang cerdas, terampil, dan sadar hukum.",
+                "Meningkatkan peran aktif pramuka dalam menciptakan keamanan lingkungan.",
+                "Mengembangkan krida-krida kebhayangkaraan secara profesional."
+            ],
+            jadwalHari: "Setiap Hari Minggu, Pukul 08.00 - 12.00 WIB",
+            jadwalLokasi: "Halaman Mapolsek Metro Jatinegara, Jakarta Timur",
+            gform: "https://forms.google.com",
+            wa: "https://wa.me/6281234567890",
+            ig: "https://instagram.com",
+            fb: "https://facebook.com",
+            yt: "https://youtube.com",
+            footer: "© 2026 Saka Bhayangkara Jatinegara. All rights reserved.",
+            pengurus: [
+                { nama: "Kapolsek Metro Jatinegara", jabatan: "Ketua Mabisaka", foto: "" },
+                { nama: "Kanit Binmas", jabatan: "Ketua Pimpinan Saka", foto: "" },
+                { nama: "Ketua Dewan Saka Putra", jabatan: "Ketua Dewan Saka", foto: "" },
+                { nama: "Ketua Dewan Saka Putri", jabatan: "Wakil Ketua Dewan Saka", foto: "" }
+            ],
+            galeri: [
+                { judul: "Latihan Rutin Pengaturan Lalu Lintas", ket: "Praktik lapangan bersama unit Lantas Polsek Jatinegara", img: "https://images.unsplash.com/photo-1588681664899-f142ff2dc9b1?auto=format&fit=crop&w=800&q=80" },
+                { judul: "Pendidikan Dasar & Pelantikan", ket: "Pembinaan mental, fisik, dan kedisiplinan anggota baru", img: "https://images.unsplash.com/photo-1526976668912-1a811878dd37?auto=format&fit=crop&w=800&q=80" },
+                { judul: "Bakti Sosial & Tanggap Bencana", ket: "Aksi peduli masyarakat di wilayah Kecamatan Jatinegara", img: "https://images.unsplash.com/photo-1593113598332-cd288d649433?auto=format&fit=crop&w=800&q=80" }
+            ]
+        };
+    </script>
+
+    <script>
+        let siteData = JSON.parse(localStorage.getItem('sb_site_data_v2')) || JSON.parse(JSON.stringify(window.INITIAL_SITE_DATA));
+
+        // Render seluruh data ke DOM halaman utama
+        function renderSite() {
+            document.title = siteData.title;
+            document.documentElement.style.setProperty('--primary-color', siteData.primaryColor);
+            document.documentElement.style.setProperty('--accent-color', siteData.accentColor);
+
+            document.getElementById('site-title').innerText = siteData.title;
+            document.getElementById('site-subtitle').innerText = siteData.subtitle;
+            document.getElementById('hero-heading').innerText = siteData.heroHeading;
+            document.getElementById('hero-subtext').innerText = siteData.heroSubtext;
+            document.getElementById('about-desc-1').innerText = siteData.about1;
+            document.getElementById('about-desc-2').innerText = siteData.about2;
+            document.getElementById('visi-text').innerText = siteData.visi;
+
+            // Logo
+            const logoImg = document.getElementById('site-logo-img');
+            const logoFallback = document.getElementById('site-logo-fallback');
+            if (siteData.logoBase64) {
+                logoImg.src = siteData.logoBase64;
+                logoImg.classList.remove('hidden');
+                logoFallback.classList.add('hidden');
+            } else {
+                logoImg.classList.add('hidden');
+                logoFallback.classList.remove('hidden');
+            }
+
+            // Hero BG
+            const heroBg = document.getElementById('hero-bg-img');
+            if (siteData.heroBgBase64) {
+                heroBg.src = siteData.heroBgBase64;
+                heroBg.classList.remove('hidden');
+            } else {
+                heroBg.classList.add('hidden');
+            }
+
+            // Misi
+            const misiList = document.getElementById('misi-list');
+            misiList.innerHTML = siteData.misi.map(m => 
+                `<li class="flex items-start"><i class="fa-solid fa-check text-theme-accent mt-1 mr-3"></i><span>${m}</span></li>`
+            ).join('');
+
+            // Jadwal & Tautan
+            document.getElementById('jadwal-hari').innerText = siteData.jadwalHari;
+            document.getElementById('jadwal-lokasi').innerHTML = `<i class="fa-solid fa-location-dot text-theme-accent mr-1"></i> ${siteData.jadwalLokasi}`;
+            document.getElementById('gform-link').href = siteData.gform;
+            document.getElementById('wa-link').href = siteData.wa;
+            document.getElementById('ig-link').href = siteData.ig;
+            document.getElementById('fb-link').href = siteData.fb;
+            document.getElementById('yt-link').href = siteData.yt;
+            document.getElementById('footer-copy').innerText = siteData.footer;
+
+            // Pengurus
+            const pengurusGrid = document.getElementById('pengurus-grid');
+            pengurusGrid.innerHTML = siteData.pengurus.map(p => `
+                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-6 text-center shadow-sm">
+                    ${p.foto 
+                        ? `<img src="${p.foto}" alt="${p.nama}" class="w-20 h-20 rounded-full object-cover mx-auto mb-4 border-2 border-theme-accent">`
+                        : `<div class="w-20 h-20 rounded-full bg-slate-200 text-slate-600 flex items-center justify-center mx-auto mb-4 text-2xl"><i class="fa-solid fa-user-shield"></i></div>`
+                    }
+                    <h4 class="font-bold text-slate-900 text-base">${p.nama}</h4>
+                    <p class="text-xs font-semibold text-theme-accent mt-1">${p.jabatan}</p>
+                </div>
+            `).join('');
+
+            // Galeri
+            const galeriGrid = document.getElementById('galeri-grid');
+            galeriGrid.innerHTML = siteData.galeri.map(g => `
+                <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-200">
+                    <img src="${g.img}" alt="${g.judul}" class="w-full h-52 object-cover">
+                    <div class="p-5">
+                        <h4 class="font-bold text-slate-900 text-base mb-1">${g.judul}</h4>
+                        <p class="text-xs text-slate-600">${g.ket}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Fungsi pindah tab di dalam modal admin
+        function switchAdminTab(tabId) {
+            document.querySelectorAll('.admin-tab-content').forEach(el => el.classList.add('hidden'));
+            document.getElementById(tabId).classList.remove('hidden');
+            document.querySelectorAll('.admin-tab-btn').forEach(btn => {
+                if (btn.dataset.tab === tabId) {
+                    btn.classList.add('border-amber-600', 'text-amber-700');
+                    btn.classList.remove('border-transparent', 'text-slate-500');
+                } else {
+                    btn.classList.remove('border-amber-600', 'text-amber-700');
+                    btn.classList.add('border-transparent', 'text-slate-500');
+                }
+            });
+        }
+
+        // Populate form admin saat dibuka
+        function populateAdminForms() {
+            document.getElementById('inp-title').value = siteData.title;
+            document.getElementById('inp-subtitle').value = siteData.subtitle;
+            document.getElementById('inp-hero-heading').value = siteData.heroHeading;
+            document.getElementById('inp-hero-subtext').value = siteData.heroSubtext;
+            document.getElementById('inp-primary-color').value = siteData.primaryColor;
+            document.getElementById('inp-accent-color').value = siteData.accentColor;
+            document.getElementById('inp-new-pin').value = siteData.pin;
+
+            document.getElementById('inp-about-1').value = siteData.about1;
+            document.getElementById('inp-about-2').value = siteData.about2;
+            document.getElementById('inp-visi').value = siteData.visi;
+            document.getElementById('inp-misi').value = siteData.misi.join('\n');
+
+            document.getElementById('inp-jadwal-hari').value = siteData.jadwalHari;
+            document.getElementById('inp-jadwal-lokasi').value = siteData.jadwalLokasi;
+            document.getElementById('inp-gform').value = siteData.gform;
+            document.getElementById('inp-wa').value = siteData.wa;
+            document.getElementById('inp-ig').value = siteData.ig;
+            document.getElementById('inp-fb').value = siteData.fb;
+            document.getElementById('inp-yt').value = siteData.yt;
+            document.getElementById('inp-footer').value = siteData.footer;
+
+            renderAdminPengurus();
+            renderAdminGaleri();
+        }
+
+        function renderAdminPengurus() {
+            const list = document.getElementById('admin-pengurus-list');
+            list.innerHTML = siteData.pengurus.map((p, idx) => `
+                <div class="p-3 border rounded-xl bg-slate-50 grid grid-cols-1 sm:grid-cols-12 gap-2 items-center">
+                    <input type="text" placeholder="Nama" value="${p.nama}" onchange="siteData.pengurus[${idx}].nama=this.value" class="sm:col-span-4 px-2.5 py-1.5 border rounded-lg bg-white text-xs">
+                    <input type="text" placeholder="Jabatan" value="${p.jabatan}" onchange="siteData.pengurus[${idx}].jabatan=this.value" class="sm:col-span-4 px-2.5 py-1.5 border rounded-lg bg-white text-xs">
+                    <input type="file" accept="image/*" onchange="handleItemImageUpload(event, 'pengurus', ${idx})" class="sm:col-span-3 text-xs">
+                    <button type="button" onclick="siteData.pengurus.splice(${idx},1);renderAdminPengurus()" class="sm:col-span-1 text-rose-600 hover:text-rose-800 text-center"><i class="fa-solid fa-trash"></i></button>
+                </div>
+            `).join('');
+        }
+
+        function addPengurusRow() {
+            siteData.pengurus.push({ nama: "Nama Pengurus", jabatan: "Jabatan", foto: "" });
+            renderAdminPengurus();
+        }
+
+        function renderAdminGaleri() {
+            const list = document.getElementById('admin-galeri-list');
+            list.innerHTML = siteData.galeri.map((g, idx) => `
+                <div class="p-3 border rounded-xl bg-slate-50 grid grid-cols-1 sm:grid-cols-12 gap-2 items-center">
+                    <input type="text" placeholder="Judul Kegiatan" value="${g.judul}" onchange="siteData.galeri[${idx}].judul=this.value" class="sm:col-span-4 px-2.5 py-1.5 border rounded-lg bg-white text-xs">
+                    <input type="text" placeholder="Keterangan" value="${g.ket}" onchange="siteData.galeri[${idx}].ket=this.value" class="sm:col-span-4 px-2.5 py-1.5 border rounded-lg bg-white text-xs">
+                    <input type="file" accept="image/*" onchange="handleItemImageUpload(event, 'galeri', ${idx})" class="sm:col-span-3 text-xs">
+                    <button type="button" onclick="siteData.galeri.splice(${idx},1);renderAdminGaleri()" class="sm:col-span-1 text-rose-600 hover:text-rose-800 text-center"><i class="fa-solid fa-trash"></i></button>
+                </div>
+            `).join('');
+        }
+
+        function addGaleriRow() {
+            siteData.galeri.push({ judul: "Kegiatan Baru", ket: "Deskripsi singkat kegiatan", img: "https://images.unsplash.com/photo-1526976668912-1a811878dd37?auto=format&fit=crop&w=800&q=80" });
+            renderAdminGaleri();
+        }
+
+        function handleItemImageUpload(event, type, idx) {
+            const file = event.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                if (type === 'pengurus') siteData.pengurus[idx].foto = e.target.result;
+                if (type === 'galeri') siteData.galeri[idx].img = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        // Upload Logo & Hero
+        document.getElementById('inp-logo-file').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = ev => { siteData.logoBase64 = ev.target.result; };
+            reader.readAsDataURL(file);
+        });
+
+        document.getElementById('inp-hero-file').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = ev => { siteData.heroBgBase64 = ev.target.result; };
+            reader.readAsDataURL(file);
+        });
+
+        function collectFormData() {
+            siteData.title = document.getElementById('inp-title').value;
+            siteData.subtitle = document.getElementById('inp-subtitle').value;
+            siteData.heroHeading = document.getElementById('inp-hero-heading').value;
+            siteData.heroSubtext = document.getElementById('inp-hero-subtext').value;
+            siteData.primaryColor = document.getElementById('inp-primary-color').value;
+            siteData.accentColor = document.getElementById('inp-accent-color').value;
+            siteData.pin = document.getElementById('inp-new-pin').value || "12345";
+
+            siteData.about1 = document.getElementById('inp-about-1').value;
+            siteData.about2 = document.getElementById('inp-about-2').value;
+            siteData.visi = document.getElementById('inp-visi').value;
+            siteData.misi = document.getElementById('inp-misi').value.split('\n').filter(x => x.trim() !== '');
+
+            siteData.jadwalHari = document.getElementById('inp-jadwal-hari').value;
+            siteData.jadwalLokasi = document.getElementById('inp-jadwal-lokasi').value;
+            siteData.gform = document.getElementById('inp-gform').value;
+            siteData.wa = document.getElementById('inp-wa').value;
+            siteData.ig = document.getElementById('inp-ig').value;
+            siteData.fb = document.getElementById('inp-fb').value;
+            siteData.yt = document.getElementById('inp-yt').value;
+            siteData.footer = document.getElementById('inp-footer').value;
+
+            localStorage.setItem('sb_site_data_v2', JSON.stringify(siteData));
+            renderSite();
+        }
+
+        // Hash Router #admin
+        const adminModal = document.getElementById('admin-modal');
+        const authBox = document.getElementById('auth-box');
+        const dashboardBox = document.getElementById('dashboard-box');
+
+        function checkAdminRoute() {
+            if (sessionStorage.getItem('sb_admin_logged') === 'true') {
+                document.getElementById('floating-admin-btn').classList.remove('hidden');
+            }
+            if (window.location.hash === '#admin') {
+                adminModal.classList.remove('hidden');
+                if (sessionStorage.getItem('sb_admin_logged') === 'true') {
+                    authBox.classList.add('hidden');
+                    dashboardBox.classList.remove('hidden');
+                    populateAdminForms();
+                } else {
+                    authBox.classList.remove('hidden');
+                    dashboardBox.classList.add('hidden');
+                }
+            }
+        }
+
+        window.addEventListener('hashchange', checkAdminRoute);
+        window.addEventListener('load', () => { renderSite(); checkAdminRoute(); });
+
+        document.getElementById('submit-pin').addEventListener('click', () => {
+            const val = document.getElementById('admin-pin').value;
+            if (val === siteData.pin) {
+                sessionStorage.setItem('sb_admin_logged', 'true');
+                document.getElementById('floating-admin-btn').classList.remove('hidden');
+                authBox.classList.add('hidden');
+                dashboardBox.classList.remove('hidden');
+                populateAdminForms();
+            } else {
+                alert('PIN salah! PIN saat ini adalah: ' + siteData.pin);
+            }
+        });
+
+        document.getElementById('close-auth').addEventListener('click', () => {
+            adminModal.classList.add('hidden');
+            history.replaceState(null, null, ' ');
+        });
+
+        document.getElementById('close-dashboard').addEventListener('click', () => {
+            adminModal.classList.add('hidden');
+            history.replaceState(null, null, ' ');
+        });
+
+        document.getElementById('apply-preview-btn').addEventListener('click', () => {
+            collectFormData();
+            adminModal.classList.add('hidden');
+            history.replaceState(null, null, ' ');
+            alert('Perubahan diterapkan ke halaman! Anda bisa meninjau tampilan sekarang, lalu klik "Edit Situs" atau buka #admin lagi untuk mengunduh file index.html.');
+        });
+
+        document.getElementById('reset-default-btn').addEventListener('click', () => {
+            if (confirm('Yakin ingin mengembalikan semua pengaturan ke bawaan awal?')) {
+                localStorage.removeItem('sb_site_data_v2');
+                siteData = JSON.parse(JSON.stringify(window.INITIAL_SITE_DATA));
+                renderSite();
+                populateAdminForms();
+            }
+        });
+
+        // EKSPOR KE FILE INDEX.HTML UTUH SIAP UPLOAD GITHUB
+        document.getElementById('download-github-html').addEventListener('click', () => {
+            collectFormData();
+            
+            // Sembunyikan modal admin & tombol floating sebelum mengambil snapshot HTML
+            adminModal.classList.add('hidden');
+            document.getElementById('floating-admin-btn').classList.add('hidden');
+            history.replaceState(null, null, ' ');
+
+            // Tanamkan data terbaru langsung ke dalam tag script INITIAL_SITE_DATA di dokumen
+            const dataScript = document.getElementById('site-data-script');
+            dataScript.textContent = "\n        window.INITIAL_SITE_DATA = " + JSON.stringify(siteData, null, 4) + ";\n    ";
+
+            const finalHtml = "<!DOCTYPE html>\n" + document.documentElement.outerHTML;
+            
+            // Kembalikan tombol floating untuk sesi admin saat ini
+            document.getElementById('floating-admin-btn').classList.remove('hidden');
+
+            const blob = new Blob([finalHtml], { type: 'text/html;charset=utf-8' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = 'index.html';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        });
+    </script>
+</body>
+</html>

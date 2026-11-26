@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saka Bhayangkara Jatinegara</title>
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Saka Bhayangkara Jatinegara">
+    <meta property="og:description" content="Wadah pembinaan Pramuka Penegak dan Pandega di bidang kebhayangkaraan - Polsek Metro Jatinegara.">
+    <meta property="og:type" content="website">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome untuk Ikon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        police: { 900: '#1e293b', 800: '#0f172a', 600: '#475569', 500: '#64748b' },
+                        pramuka: { 600: '#854d0e', 700: '#713f12', 800: '#581c87' }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased">
+
+    <!-- NAVBAR -->
+    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-sm border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div id="nav-logo-container" class="w-12 h-12 bg-slate-800 text-white rounded-full flex items-center justify-center font-bold text-lg shadow">
+                    SB
+                </div>
+                <div>
+                    <h1 id="site-title" class="font-bold text-lg sm:text-xl text-slate-900 leading-tight">Saka Bhayangkara Jatinegara</h1>
+                    <p class="text-xs text-slate-500">Polsek Metro Jatinegara</p>
+                </div>
+            </div>
+            <nav class="hidden md:flex items-center space-x-8 font-medium text-sm">
+                <a href="#beranda" class="hover:text-amber-700 transition">Beranda</a>
+                <a href="#tentang" class="hover:text-amber-700 transition">Tentang</a>
+                <a href="#kegiatan" class="hover:text-amber-700 transition">Kegiatan</a>
+                <a href="#struktur" class="hover:text-amber-700 transition">Pengurus</a>
+                <a href="#galeri" class="hover:text-amber-700 transition">Galeri</a>
+                <a href="#kontak" class="bg-amber-700 text-white px-4 py-2 rounded-lg shadow hover:bg-amber-800 transition">Daftar Anggota</a>
+            </nav>
+            <button id="admin-trigger-btn" class="md:hidden text-slate-700 focus:outline-none">
+                <i class="fa-solid fa-bars text-xl"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section id="beranda" class="relative bg-slate-900 text-white py-24 sm:py-32 overflow-hidden">
+        <div class="absolute inset-0 opacity-40 bg-[radial-gradient(#38bdf8_1px,transparent_1px)] [background-size:16px_16px]"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+            <span class="bg-amber-600/30 text-amber-400 text-xs sm:text-sm font-semibold px-3 py-1 rounded-full border border-amber-500/30">Pramuka Saka Bhayangkara</span>
+            <h2 id="hero-heading" class="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight mt-4 mb-6">Satuan Karya Pramuka<br>Bhayangkara Jatinegara</h2>
+            <p id="hero-subtext" class="max-w-2xl mx-auto text-base sm:text-lg text-slate-300 mb-8">Wadah pembinaan bagi Pramuka Penegak dan Pandega dalam bidang kebhayangkaraan guna menciptakan keamanan dan ketertiban masyarakat.</p>
+            <div class="flex justify-center gap-4">
+                <a href="#kontak" class="bg-amber-600 hover:bg-amber-700 text-white font-semibold px-6 py-3 rounded-xl shadow-lg transition">Gabung Sekarang</a>
+                <a href="#tentang" class="bg-slate-800 hover:bg-slate-700 text-white font-semibold px-6 py-3 rounded-xl border border-slate-700 transition">Pelajari Lebih Lanjut</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- TENTANG KAMI -->
+    <section id="tentang" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h3 class="text-amber-700 font-semibold text-sm uppercase tracking-wider">Profil Organisasi</h3>
+                <h2 class="text-3xl font-bold text-slate-900 mt-1">Tentang Saka Bhayangkara Jatinegara</h2>
+                <div class="w-16 h-1 bg-amber-600 mx-auto mt-4 rounded-full"></div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h4 class="text-xl font-bold text-slate-900 mb-4">Siapa Kami?</h4>
+                    <p class="text-slate-600 leading-relaxed mb-4">Saka Bhayangkara adalah wadah pengembangan penataran, pengetahuan, dan keterampilan khusus di bidang kebhayangkaraan. Kami dibina langsung oleh Polsek Metro Jatinegara untuk membentuk generasi muda yang taat hukum, disiplin, dan memiliki jiwa sosial tinggi.</p>
+                    <p class="text-slate-600 leading-relaxed">Melalui latihan rutin, anggota dilatih dalam hal pengaturan lalu lintas, tempat kejadian perkara (TKP) awal, penanggulangan bencana, serta bela diri.</p>
+                </div>
+                <div class="bg-slate-100 p-8 rounded-2xl border border-slate-200 shadow-sm">
+                    <h4 class="text-lg font-bold text-slate-900 mb-4"><i class="fa-solid fa-bullseye text-amber-600 mr-2"></i> Visi & Misi</h4>
+                    <ul class="space-y-3 text-slate-700 text-sm">
+                        <li class="flex items-start"><i class="fa-solid fa-check text-amber-600 mt-1 mr-3"></i>Mewujudkan kader bangsa yang cerdas, terampil, dan sadar hukum.</li>
+                        <li class="flex items-start"><i class="fa-solid fa-check text-amber-600 mt-1 mr-3"></i>Meningkatkan peran aktif pramuka dalam menciptakan keamanan lingkungan.</li>
+                        <li class="flex items-start"><i class="fa-solid fa-check text-amber-600 mt-1 mr-3"></i>Mengembangkan krida-krida kebhayangkaraan secara profesional.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- KEGIATAN -->
+    <section id="kegiatan" class="py-20 bg-slate-50 border-t border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h3 class="text-amber-700 font-semibold text-sm uppercase tracking-wider">Krida & Agenda</h3>
+                <h2 class="text-3xl font-bold text-slate-900 mt-1">Krida Kebhayangkaraan</h2>
+                <div class="w-16 h-1 bg-amber-600 mx-auto mt-4 rounded-full"></div>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                    <div class="w-12 h-12 bg-amber-100 text-amber-700 rounded-xl flex items-center justify-center mb-4 text-xl"><i class="fa-solid fa-traffic-light"></i></div>
+                    <h4 class="font-bold text-slate-900 mb-2">Krida Lantas</h4>
+                    <p class="text-sm text-slate-600">Pengetahuan dan keterampilan pengaturan lalu lintas serta keselamatan berkendara.</p>
+                </div>
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                    <div class="w-12 h-12 bg-amber-100 text-amber-700 rounded-xl flex items-center justify-center mb-4 text-xl"><i class="fa-solid fa-shield-halved"></i></div>
+                    <h4 class="font-bold text-slate-900 mb-2">Krida Tibmas</h4>
+                    <p class="text-sm text-slate-600">Ketertiban masyarakat, pengamanan lingkungan, dan kesadaran hukum.</p>
+                </div>
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                    <div class="w-12 h-12 bg-amber-100 text-amber-700 rounded-xl flex items-center justify-center mb-4 text-xl"><i class="fa-solid fa-magnifying-glass"></i></div>
+                    <h4 class="font-bold text-slate-900 mb-2">Krida TPTKP</h4>
+                    <p class="text-sm text-slate-600">Tindakan Pertama di Tempat Kejadian Perkara dan pengamanan barang bukti awal.</p>
+                </div>
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                    <div class="w-12 h-12 bg-amber-100 text-amber-700 rounded-xl flex items-center justify-center mb-4 text-xl"><i class="fa-solid fa-kit-medical"></i></div>
+                    <h4 class="font-bold text-slate-900 mb-2">Krida P2B</h4>
+                    <p class="text-sm text-slate-600">Pencegahan dan Penanggulangan Bencana, SAR dasar, dan pertolongan pertama.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- KONTAK & PENDAFTARAN -->
+    <section id="kontak" class="py-20 bg-white border-t border-slate-200">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl font-bold text-slate-900 mb-4">Bergabung Bersama Kami</h2>
+            <p class="text-slate-600 mb-8">Terbuka bagi Pramuka Penegak dan Pandega di wilayah Kecamatan Jatinegara dan sekitarnya.</p>
+            <a id="gform-link" href="https://forms.google.com" target="_blank" class="inline-flex items-center gap-2 bg-amber-700 hover:bg-amber-800 text-white font-semibold px-8 py-4 rounded-xl shadow-lg transition">
+                <i class="fa-solid fa-file-signature"></i> Isi Formulir Pendaftaran (Google Form)
+            </a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-900 text-slate-400 py-12 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p class="text-sm">&copy; 2026 Saka Bhayangkara Jatinegara. All rights reserved.</p>
+            <div class="flex space-x-4 text-lg">
+                <a href="#" class="hover:text-white transition"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#" class="hover:text-white transition"><i class="fa-brands fa-facebook"></i></a>
+                <a href="#" class="hover:text-white transition"><i class="fa-brands fa-youtube"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ADMIN PANEL MODAL (Hidden by default, triggered via #admin) -->
+    <div id="admin-modal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div id="auth-box" class="bg-white w-full max-w-md p-6 rounded-2xl shadow-2xl">
+            <h3 class="text-xl font-bold text-slate-900 mb-2">Login Admin Panel</h3>
+            <p class="text-xs text-slate-500 mb-4">Masukkan PIN akses untuk masuk ke mode pengelolaan web.</p>
+            <input type="password" id="admin-pin" placeholder="Masukkan PIN (default: 12345)" class="w-full px-4 py-2 border rounded-lg mb-4 text-sm focus:outline-none focus:ring-2 focus:ring-amber-600">
+            <div class="flex justify-end gap-2">
+                <button id="close-auth" class="px-4 py-2 bg-slate-200 text-slate-700 text-sm rounded-lg hover:bg-slate-300">Batal</button>
+                <button id="submit-pin" class="px-4 py-2 bg-amber-600 text-white text-sm rounded-lg hover:bg-amber-700">Masuk</button>
+            </div>
+        </div>
+
+        <div id="dashboard-box" class="bg-white w-full max-w-2xl p-6 rounded-2xl shadow-2xl hidden max-h-[90vh] overflow-y-auto">
+            <div class="flex justify-between items-center mb-4 border-b pb-3">
+                <h3 class="text-xl font-bold text-slate-900"><i class="fa-solid fa-gear text-amber-600 mr-2"></i> Panel Pengelola Situs</h3>
+                <button id="close-dashboard" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark text-lg"></i></button>
+            </div>
+            <div class="space-y-4 text-sm">
+                <div>
+                    <label class="font-medium text-slate-700 block mb-1">Judul Situs Utama</label>
+                    <input type="text" id="edit-title" class="w-full px-3 py-2 border rounded-lg">
+                </div>
+                <div>
+                    <label class="font-medium text-slate-700 block mb-1">Teks Utama Beranda (Hero Heading)</label>
+                    <textarea id="edit-hero" class="w-full px-3 py-2 border rounded-lg" rows="2"></textarea>
+                </div>
+                <div>
+                    <label class="font-medium text-slate-700 block mb-1">Tautan Google Form Pendaftaran</label>
+                    <input type="url" id="edit-gform" class="w-full px-3 py-2 border rounded-lg">
+                </div>
+                <div class="flex justify-between items-center pt-4 border-t">
+                    <button id="export-html" class="px-4 py-2 bg-slate-800 text-white rounded-lg hover:bg-slate-900 font-medium"><i class="fa-solid fa-download mr-1"></i> Unduh index.html</button>
+                    <button id="save-changes" class="px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 font-medium">Simpan Perubahan</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC UNTUK HASH ROUTER & ADMIN -->
+    <script>
+        const adminModal = document.getElementById('admin-modal');
+        const authBox = document.getElementById('auth-box');
+        const dashboardBox = document.getElementById('dashboard-box');
+        const submitPin = document.getElementById('submit-pin');
+        const closeAuth = document.getElementById('close-auth');
+        const closeDashboard = document.getElementById('close-dashboard');
+        const saveChanges = document.getElementById('save-changes');
+        const exportHtml = document.getElementById('export-html');
+
+        function checkHashRoute() {
+            if (window.location.hash === '#admin') {
+                adminModal.classList.remove('hidden');
+                if (sessionStorage.getItem('sb_admin_auth') === 'true') {
+                    openDashboard();
+                } else {
+                    authBox.classList.remove('hidden');
+                    dashboardBox.classList.add('hidden');
+                }
+            }
+        }
+
+        function openDashboard() {
+            authBox.classList.add('hidden');
+            dashboardBox.classList.remove('hidden');
+            document.getElementById('edit-title').value = document.getElementById('site-title').innerText;
+            document.getElementById('edit-hero').value = document.getElementById('hero-heading').innerText;
+            document.getElementById('edit-gform').value = document.getElementById('gform-link').href;
+        }
+
+        window.addEventListener('hashchange', checkHashRoute);
+        window.addEventListener('load', checkHashRoute);
+
+        submitPin.addEventListener('click', () => {
+            const pin = document.getElementById('admin-pin').value;
+            if (pin === '12345') {
+                sessionStorage.setItem('sb_admin_auth', 'true');
+                openDashboard();
+            } else {
+                alert('PIN salah! Gunakan "12345".');
+            }
+        });
+
+        closeAuth.addEventListener('click', () => {
+            adminModal.classList.add('hidden');
+            window.location.hash = '';
+        });
+
+        closeDashboard.addEventListener('click', () => {
+            adminModal.classList.add('hidden');
+            window.location.hash = '';
+        });
+
+        saveChanges.addEventListener('click', () => {
+            const newTitle = document.getElementById('edit-title').value;
+            const newHero = document.getElementById('edit-hero').value;
+            const newGform = document.getElementById('edit-gform').value;
+
+            document.getElementById('site-title').innerText = newTitle;
+            document.getElementById('hero-heading').innerText = newHero;
+            document.getElementById('gform-link').href = newGform;
+
+            localStorage.setItem('sb_title', newTitle);
+            localStorage.setItem('sb_hero', newHero);
+            localStorage.setItem('sb_gform', newGform);
+
+            alert('Perubahan berhasil disimpan!');
+            adminModal.classList.add('hidden');
+            window.location.hash = '';
+        });
+
+        exportHtml.addEventListener('click', () => {
+            adminModal.classList.add('hidden');
+            window.location.hash = '';
+            const fullHtml = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+            const blob = new Blob([fullHtml], { type: 'text/html' });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = 'index.html';
+            a.click();
+        });
+
+        window.addEventListener('DOMContentLoaded', () => {
+            if (localStorage.getItem('sb_title')) {
+                document.getElementById('site-title').innerText = localStorage.getItem('sb_title');
+            }
+            if (localStorage.getItem('sb_hero')) {
+                document.getElementById('hero-heading').innerText = localStorage.getItem('sb_hero');
+            }
+            if (localStorage.getItem('sb_gform')) {
+                document.getElementById('gform-link').href = localStorage.getItem('sb_gform');
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1983 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saka Bhayangkara Jatinegara — Portal Resmi Kwartir Ranting Jatinegara</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter & Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        navy: {
+                            950: '#090d16',
+                            900: '#0f172a',
+                            800: '#1e293b',
+                        },
+                        crimson: {
+                            700: '#b91c1c',
+                            600: '#dc2626',
+                        },
+                        pramuka: {
+                            600: '#d97706',
+                            500: '#f59e0b',
+                            400: '#fbbf24',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #f8fafc;
+            color: #1e293b;
+        }
+
+        /* Subtle tactical grid overlay for Hero */
+        .bg-tactical-grid {
+            background-image: radial-gradient(rgba(251, 191, 36, 0.12) 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+
+        /* Admin Inline Edit Styling (Active only inside #admin workspace when inline edit is enabled) */
+        body.admin-inline-active .admin-section-frame {
+            position: relative;
+            outline: 2px dashed rgba(217, 119, 6, 0.45);
+            outline-offset: -4px;
+            transition: all 0.2s ease;
+        }
+
+        body.admin-inline-active .admin-section-frame:hover {
+            outline: 2px solid #d97706;
+            background-color: rgba(254, 243, 199, 0.18);
+        }
+
+        body.admin-inline-active [data-editable="true"] {
+            cursor: text;
+            border-radius: 0.375rem;
+            padding: 2px 6px;
+            margin: -2px -6px;
+            background-color: rgba(251, 191, 36, 0.14);
+            border-bottom: 1.5px dashed #d97706;
+            transition: all 0.2s ease;
+        }
+
+        body.admin-inline-active [data-editable="true"]:hover,
+        body.admin-inline-active [data-editable="true"]:focus {
+            outline: none;
+            background-color: #fef3c7;
+            box-shadow: 0 0 0 2px #d97706;
+            color: #0f172a;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-amber-600 selection:text-white">
+
+    <!-- ==================== ADMIN TOP WORKSPACE HEADER (ONLY VISIBLE IN #admin WHEN AUTHENTICATED) ==================== -->
+    <div id="admin-workspace-bar" class="hidden sticky top-0 z-50 bg-slate-950 text-white border-b-2 border-amber-500 shadow-2xl">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+            <div class="flex flex-wrap items-center justify-between gap-3">
+                <!-- Admin Status Badge -->
+                <div class="flex items-center gap-3">
+                    <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-crimson-700 to-amber-600 flex items-center justify-center shadow border border-amber-400/40">
+                        <i class="fa-solid fa-user-shield text-white text-sm"></i>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <span class="font-heading font-extrabold text-xs sm:text-sm tracking-wide uppercase text-amber-400">
+                                ADMIN PANEL — SAKA BHAYANGKARA JATINEGARA
+                            </span>
+                            <span class="px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 text-[10px] font-bold">
+                                SESI AKTIF
+                            </span>
+                        </div>
+                        <p class="text-[11px] text-slate-400 hidden sm:block">
+                            Mode Pengelola (#admin) • Semua perubahan otomatis tersimpan secara lokal
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Admin Quick Actions -->
+                <div class="flex flex-wrap items-center gap-2">
+                    <button onclick="openHeroModal()" class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 text-xs font-semibold flex items-center gap-1.5 transition cursor-pointer">
+                        <i class="fa-solid fa-wand-magic-sparkles text-amber-400"></i>
+                        <span>Edit Hero & Statistik</span>
+                    </button>
+
+                    <button onclick="openSectionModal()" class="px-3 py-1.5 rounded-xl bg-amber-600 hover:bg-amber-500 text-white text-xs font-semibold flex items-center gap-1.5 shadow transition cursor-pointer">
+                        <i class="fa-solid fa-plus"></i>
+                        <span>Tambah Bagian</span>
+                    </button>
+
+                    <button id="toggle-inline-btn" onclick="toggleInlineEdit()" class="px-3 py-1.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold flex items-center gap-1.5 shadow transition cursor-pointer">
+                        <i class="fa-solid fa-i-cursor"></i>
+                        <span id="toggle-inline-text">Edit Teks Langsung: ON</span>
+                    </button>
+
+                    <button onclick="exportCleanPublicHTML()" class="px-3 py-1.5 rounded-xl bg-emerald-700 hover:bg-emerald-600 text-white text-xs font-semibold flex items-center gap-1.5 shadow transition cursor-pointer">
+                        <i class="fa-solid fa-file-export"></i>
+                        <span>Ekspor HTML Publik</span>
+                    </button>
+
+                    <button onclick="openPasswordModal()" class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 text-xs font-semibold flex items-center gap-1.5 transition cursor-pointer" title="Ubah sandi panel admin">
+                        <i class="fa-solid fa-key text-amber-400"></i>
+                        <span>Ubah Sandi</span>
+                    </button>
+
+                    <button onclick="openResetConfirmModal()" class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-rose-900/70 text-rose-300 border border-slate-700 text-xs font-semibold flex items-center gap-1.5 transition cursor-pointer" title="Kembalikan data awal">
+                        <i class="fa-solid fa-rotate-left"></i>
+                        <span class="hidden md:inline">Reset</span>
+                    </button>
+
+                    <button onclick="exitAdminMode()" class="px-3.5 py-1.5 rounded-xl bg-crimson-700 hover:bg-crimson-600 text-white text-xs font-bold flex items-center gap-1.5 shadow transition cursor-pointer">
+                        <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                        <span>Keluar / Lihat Publik</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== PUBLIC NAVIGATION BAR ==================== -->
+    <header id="main-navbar" class="sticky top-0 z-40 bg-slate-900/95 backdrop-blur-md text-white border-b border-slate-800 shadow-lg transition-all">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16 sm:h-20">
+                <!-- Official Brand Identity -->
+                <a href="#" class="flex items-center gap-3.5 group">
+                    <div class="relative w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br from-crimson-700 via-slate-900 to-amber-600 p-[2px] shadow-md">
+                        <div class="w-full h-full rounded-[10px] bg-slate-900 flex items-center justify-center">
+                            <i class="fa-solid fa-shield-halved text-amber-400 text-lg sm:text-xl group-hover:scale-110 transition-transform"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <span class="font-heading font-extrabold text-base sm:text-lg tracking-tight block leading-none text-white">
+                            SAKA BHAYANGKARA
+                        </span>
+                        <span class="text-[11px] sm:text-xs font-bold tracking-widest text-amber-400 uppercase mt-1 block">
+                            Ranting Jatinegara • Jakarta Timur
+                        </span>
+                    </div>
+                </a>
+
+                <!-- Clean Public Navigation Links (Desktop) -->
+                <nav id="dynamic-nav-links" class="hidden md:flex items-center gap-7 text-sm font-medium text-slate-300">
+                    <!-- Dynamically synced with published sections -->
+                </nav>
+
+                <!-- Public Action CTA & Mobile Hamburger -->
+                <div class="flex items-center gap-3">
+                    <a id="nav-cta-btn" href="#sec-kontak" class="hidden sm:inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-500 hover:to-amber-600 text-white text-xs sm:text-sm font-semibold shadow-md shadow-amber-950/40 transition">
+                        <i class="fa-solid fa-paper-plane text-xs"></i>
+                        <span>Hubungi Sanggar</span>
+                    </a>
+
+                    <button id="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Buka Menu Navigasi" class="md:hidden p-2.5 rounded-xl bg-slate-800 text-slate-200 hover:bg-slate-700 focus:outline-none">
+                        <i class="fa-solid fa-bars text-lg"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Drawer -->
+        <div id="mobile-nav-drawer" class="hidden md:hidden bg-slate-900 border-t border-slate-800 px-4 pt-3 pb-5 space-y-1.5">
+            <!-- Dynamically synced with published sections -->
+        </div>
+    </header>
+
+    <!-- ==================== HERO BANNER ==================== -->
+    <section class="relative bg-slate-900 bg-tactical-grid text-white overflow-hidden border-b border-slate-800">
+        <!-- Decorative Tactical Glows -->
+        <div class="absolute inset-0 pointer-events-none overflow-hidden">
+            <div class="absolute -top-28 -right-28 w-96 h-96 rounded-full bg-crimson-700/20 blur-3xl"></div>
+            <div class="absolute bottom-0 left-10 w-80 h-80 rounded-full bg-amber-600/15 blur-3xl"></div>
+        </div>
+
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-22 lg:py-24">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+                <!-- Left Column: Headlines & CTA -->
+                <div class="lg:col-span-7">
+                    <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-slate-800/90 border border-amber-500/40 text-amber-300 text-xs font-bold tracking-wider uppercase mb-6 shadow-sm">
+                        <span class="w-2 h-2 rounded-full bg-crimson-500 animate-ping"></span>
+                        <span id="hero-badge" data-hero-field="badge">Pangkalan Polsek Jatinegara • Polres Metro Jakarta Timur</span>
+                    </div>
+
+                    <h1 id="hero-title" data-hero-field="title" class="font-heading text-3xl sm:text-5xl font-extrabold tracking-tight text-white leading-[1.15] mb-6">
+                        Membentuk Generasi Muda Disiplin, Tangguh, dan Peduli Kamtibmas
+                    </h1>
+
+                    <p id="hero-subtitle" data-hero-field="subtitle" class="text-base sm:text-lg text-slate-300 leading-relaxed mb-8 max-w-2xl">
+                        Wadah pendidikan dan pembinaan bagi Pramuka Penegak dan Pandega dalam meningkatkan pengetahuan serta keterampilan praktis di bidang kebhayangkaraan untuk mendukung keamanan dan ketertiban masyarakat di wilayah Jatinegara.
+                    </p>
+
+                    <div class="flex flex-wrap items-center gap-4">
+                        <a href="#sec-krida" class="px-6 py-3.5 rounded-xl bg-gradient-to-r from-crimson-700 to-crimson-600 hover:from-crimson-600 hover:to-crimson-500 text-white font-semibold text-sm shadow-lg shadow-crimson-950/50 transition flex items-center gap-2.5">
+                            <span>Pelajari 4 Krida</span>
+                            <i class="fa-solid fa-arrow-right text-xs"></i>
+                        </a>
+                        <a href="#sec-jadwal" class="px-6 py-3.5 rounded-xl bg-slate-800/90 hover:bg-slate-700 text-slate-200 font-semibold text-sm border border-slate-700 transition flex items-center gap-2.5">
+                            <i class="fa-regular fa-calendar-check text-amber-400"></i>
+                            <span>Jadwal Latihan Rutin</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Right Column: Official Emblem Card & Stats -->
+                <div class="lg:col-span-5">
+                    <div class="rounded-3xl bg-slate-800/70 backdrop-blur-md border border-slate-700/80 p-6 sm:p-8 shadow-2xl">
+                        <div class="flex items-center gap-4 pb-6 border-b border-slate-700/80">
+                            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-500 to-amber-700 flex items-center justify-center text-slate-950 text-2xl shadow-lg shrink-0">
+                                <i class="fa-solid fa-shield-halved"></i>
+                            </div>
+                            <div>
+                                <span class="text-xs font-bold uppercase tracking-widest text-amber-400 block">Satuan Karya Pramuka</span>
+                                <h2 class="font-heading font-extrabold text-xl text-white">Bhayangkara Jatinegara</h2>
+                                <p class="text-xs text-slate-400 mt-0.5">Kwartir Ranting Gerakan Pramuka Jatinegara</p>
+                            </div>
+                        </div>
+
+                        <div id="hero-stats-grid" class="grid grid-cols-2 gap-4 pt-6">
+                            <!-- Dynamically populated stats -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== DYNAMIC SECTIONS CONTAINER ==================== -->
+    <main id="cms-sections-container" class="divide-y divide-slate-200/80">
+        <!-- All website sections are rendered dynamically from CMS state -->
+    </main>
+
+    <!-- ==================== ADMIN BOTTOM ACTION BAR (ONLY IN #admin) ==================== -->
+    <div id="admin-bottom-bar" class="hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        <div class="p-6 sm:p-8 rounded-3xl border-2 border-dashed border-amber-500/70 bg-amber-50/60 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-4 text-center sm:text-left">
+                <div class="w-12 h-12 rounded-2xl bg-amber-600 text-white flex items-center justify-center text-xl shrink-0 shadow">
+                    <i class="fa-solid fa-layer-group"></i>
+                </div>
+                <div>
+                    <h3 class="font-heading font-bold text-slate-900 text-base sm:text-lg">Tambah Bagian Konten Baru</h3>
+                    <p class="text-xs sm:text-sm text-slate-600">Tambahkan blok Media Sosial, Jadwal Latihan, Kontak & Markas, atau Pengumuman Kustom ke halaman.</p>
+                </div>
+            </div>
+            <button onclick="openSectionModal()" class="px-5 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-sm font-semibold flex items-center gap-2 shadow-md transition shrink-0 cursor-pointer">
+                <i class="fa-solid fa-plus text-amber-400"></i>
+                <span>+ Buat Bagian Baru</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- ==================== OFFICIAL FOOTER ==================== -->
+    <footer class="bg-slate-950 text-slate-300 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-10 pb-10 border-b border-slate-800/80">
+                <!-- Col 1: Brand -->
+                <div class="md:col-span-5">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-crimson-700 to-amber-600 flex items-center justify-center text-white shadow">
+                            <i class="fa-solid fa-shield-halved"></i>
+                        </div>
+                        <div>
+                            <span class="font-heading font-extrabold text-white text-base block leading-none">SAKA BHAYANGKARA</span>
+                            <span class="text-[11px] font-semibold tracking-widest text-amber-400 uppercase mt-1 block">Ranting Jatinegara</span>
+                        </div>
+                    </div>
+                    <p class="text-sm text-slate-400 leading-relaxed max-w-md">
+                        Satuan Karya Pramuka Bhayangkara Kwartir Ranting Jatinegara, berpangkalan di Polsek Jatinegara, Polres Metro Jakarta Timur. Satyaku Kudarmakan, Darmaku Kubaktikan.
+                    </p>
+                </div>
+
+                <!-- Col 2: Navigation -->
+                <div class="md:col-span-4">
+                    <h4 class="font-heading font-bold text-white text-xs uppercase tracking-widest mb-4">Tautan Bagian</h4>
+                    <ul id="footer-nav-links" class="space-y-2.5 text-sm text-slate-400">
+                        <!-- Synced with published sections -->
+                    </ul>
+                </div>
+
+                <!-- Col 3: Markas Info -->
+                <div class="md:col-span-3">
+                    <h4 class="font-heading font-bold text-white text-xs uppercase tracking-widest mb-4">Pangkalan Pembinaan</h4>
+                    <div class="space-y-2.5 text-sm text-slate-400">
+                        <p class="flex items-start gap-2.5">
+                            <i class="fa-solid fa-building-shield text-amber-500 mt-1"></i>
+                            <span>Polsek Jatinegara, Jl. Otista Raya No.1, Bidara Cina, Jakarta Timur</span>
+                        </p>
+                        <p class="flex items-center gap-2.5">
+                            <i class="fa-regular fa-clock text-amber-500"></i>
+                            <span>Latihan Rutin: Setiap Sabtu</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pt-7 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4">
+                <p>&copy; 2026 Saka Bhayangkara Ranting Jatinegara. Hak Cipta Dilindungi.</p>
+                <div class="flex items-center gap-4">
+                    <span>Ikhlas Bakti Bina Bangsa Berbudi Bawa Laksana</span>
+                    <span class="text-slate-700">•</span>
+                    <!-- Subtle Admin Portal Access Link -->
+                    <a href="#admin" onclick="navigateToAdmin(event)" class="text-slate-500 hover:text-amber-400 transition flex items-center gap-1.5">
+                        <i class="fa-solid fa-lock text-[10px]"></i>
+                        <span>Portal Pengurus</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==================== MODAL 1: ADMIN LOGIN GATE (#admin) ==================== -->
+    <div id="admin-login-modal" class="hidden fixed inset-0 z-50 bg-slate-950/85 backdrop-blur-md flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl shadow-2xl max-w-md w-full overflow-hidden border border-slate-200">
+            <!-- Top Header -->
+            <div class="bg-slate-900 px-6 py-6 text-white text-center relative overflow-hidden">
+                <div class="absolute inset-0 bg-tactical-grid opacity-30"></div>
+                <div class="relative">
+                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-crimson-700 to-amber-600 mx-auto flex items-center justify-center text-white text-2xl shadow-lg mb-3">
+                        <i class="fa-solid fa-user-shield"></i>
+                    </div>
+                    <h2 class="font-heading font-extrabold text-xl tracking-tight">Portal Admin Dewan Saka</h2>
+                    <p class="text-xs text-slate-400 mt-1">Saka Bhayangkara Ranting Jatinegara</p>
+                </div>
+            </div>
+
+            <!-- Login Form -->
+            <form onsubmit="handleAdminLogin(event)" class="p-6 sm:p-7 space-y-5">
+                <div id="login-default-hint" class="p-3.5 rounded-xl bg-amber-50 border border-amber-200 text-xs text-amber-900 flex items-start gap-2.5">
+                    <i class="fa-solid fa-circle-info text-amber-600 mt-0.5 text-sm"></i>
+                    <div>
+                        <span class="font-bold block">Kredensial Demo Pengurus:</span>
+                        <span>Masukkan kode akses: <code class="px-1.5 py-0.5 rounded bg-amber-200/80 font-mono font-bold text-slate-900">bhayangkara2026</code></span>
+                    </div>
+                </div>
+
+                <div>
+                    <label for="admin-passcode" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">
+                        Kata Sandi / PIN Pengurus
+                    </label>
+                    <div class="relative">
+                        <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-400">
+                            <i class="fa-solid fa-key"></i>
+                        </span>
+                        <input type="password" id="admin-passcode" required placeholder="Masukkan kode akses admin..." class="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-amber-600 focus:border-amber-600 text-sm">
+                    </div>
+                    <p id="login-error-msg" class="hidden text-xs font-semibold text-rose-600 mt-2">
+                        <i class="fa-solid fa-circle-exclamation mr-1"></i><span id="login-error-text">Kode akses tidak valid. Gunakan: bhayangkara2026</span>
+                    </p>
+                </div>
+
+                <div class="flex items-center justify-between gap-3 pt-2">
+                    <button type="button" onclick="cancelAdminLogin()" class="w-1/2 py-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs sm:text-sm font-semibold transition cursor-pointer">
+                        Kembali ke Publik
+                    </button>
+                    <button type="submit" class="w-1/2 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs sm:text-sm font-bold shadow-md transition flex items-center justify-center gap-2 cursor-pointer">
+                        <i class="fa-solid fa-right-to-bracket text-amber-400"></i>
+                        <span>Masuk Panel</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ==================== MODAL 2: HERO & STATISTIK EDITOR ==================== -->
+    <div id="hero-modal" class="hidden fixed inset-0 z-50 overflow-y-auto bg-slate-950/75 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-2xl w-full overflow-hidden border border-slate-200">
+            <div class="bg-slate-900 text-white px-6 py-4 flex items-center justify-between">
+                <div class="flex items-center gap-2.5">
+                    <span class="w-8 h-8 rounded-lg bg-amber-600 flex items-center justify-center">
+                        <i class="fa-solid fa-wand-magic-sparkles text-sm"></i>
+                    </span>
+                    <h3 class="font-heading font-bold text-lg">Pengaturan Hero Banner & Statistik</h3>
+                </div>
+                <button onclick="closeHeroModal()" class="text-slate-400 hover:text-white p-1.5 rounded-lg cursor-pointer">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+
+            <form onsubmit="handleHeroFormSubmit(event)" class="p-6 space-y-4 max-h-[82vh] overflow-y-auto">
+                <div>
+                    <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Label Pangkalan (Badge Atas)</label>
+                    <input type="text" id="hero-input-badge" required class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Judul Utama (Headline)</label>
+                    <input type="text" id="hero-input-title" required class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Deskripsi Subjudul</label>
+                    <textarea id="hero-input-subtitle" rows="3" required class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm"></textarea>
+                </div>
+
+                <div class="pt-2 border-t border-slate-200">
+                    <label class="block text-xs font-bold uppercase text-slate-600 mb-2.5">Kartu Statistik Utama (4 Kotak)</label>
+                    <div id="hero-stats-inputs" class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <!-- Populated via JS -->
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-end gap-3 pt-4 border-t border-slate-200">
+                    <button type="button" onclick="closeHeroModal()" class="px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-sm font-semibold cursor-pointer">
+                        Batal
+                    </button>
+                    <button type="submit" class="px-5 py-2.5 rounded-xl bg-amber-600 hover:bg-amber-500 text-white text-sm font-bold shadow transition cursor-pointer">
+                        Simpan Perubahan Hero
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ==================== MODAL 3: ADD / EDIT SECTION BUILDER ==================== -->
+    <div id="section-modal" class="hidden fixed inset-0 z-50 overflow-y-auto bg-slate-950/75 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-2xl w-full overflow-hidden border border-slate-200">
+            <div class="bg-slate-900 text-white px-6 py-4 flex items-center justify-between">
+                <div class="flex items-center gap-2.5">
+                    <span class="w-8 h-8 rounded-lg bg-amber-600 flex items-center justify-center">
+                        <i class="fa-solid fa-layer-group text-sm"></i>
+                    </span>
+                    <h3 id="section-modal-title" class="font-heading font-bold text-lg">Tambah Bagian Baru</h3>
+                </div>
+                <button onclick="closeSectionModal()" class="text-slate-400 hover:text-white p-1.5 rounded-lg cursor-pointer">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+
+            <form id="section-form" onsubmit="handleSectionFormSubmit(event)" class="p-6 space-y-5 max-h-[82vh] overflow-y-auto">
+                <input type="hidden" id="form-section-id" value="">
+
+                <!-- Template Selector -->
+                <div id="template-selector-group">
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-2">Pilih Jenis Bagian</label>
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+                        <label class="cursor-pointer">
+                            <input type="radio" name="sectionType" value="social" class="peer sr-only" checked onchange="renderTemplateFormFields()">
+                            <div class="p-3 rounded-xl border-2 border-slate-200 peer-checked:border-amber-600 peer-checked:bg-amber-50 text-center transition">
+                                <i class="fa-solid fa-share-nodes text-amber-600 text-lg mb-1"></i>
+                                <span class="block text-xs font-bold text-slate-800">Media Sosial</span>
+                            </div>
+                        </label>
+                        <label class="cursor-pointer">
+                            <input type="radio" name="sectionType" value="schedule" class="peer sr-only" onchange="renderTemplateFormFields()">
+                            <div class="p-3 rounded-xl border-2 border-slate-200 peer-checked:border-amber-600 peer-checked:bg-amber-50 text-center transition">
+                                <i class="fa-solid fa-calendar-days text-amber-600 text-lg mb-1"></i>
+                                <span class="block text-xs font-bold text-slate-800">Jadwal Latihan</span>
+                            </div>
+                        </label>
+                        <label class="cursor-pointer">
+                            <input type="radio" name="sectionType" value="contact" class="peer sr-only" onchange="renderTemplateFormFields()">
+                            <div class="p-3 rounded-xl border-2 border-slate-200 peer-checked:border-amber-600 peer-checked:bg-amber-50 text-center transition">
+                                <i class="fa-solid fa-address-book text-amber-600 text-lg mb-1"></i>
+                                <span class="block text-xs font-bold text-slate-800">Kontak & Markas</span>
+                            </div>
+                        </label>
+                        <label class="cursor-pointer">
+                            <input type="radio" name="sectionType" value="announcement" class="peer sr-only" onchange="renderTemplateFormFields()">
+                            <div class="p-3 rounded-xl border-2 border-slate-200 peer-checked:border-amber-600 peer-checked:bg-amber-50 text-center transition">
+                                <i class="fa-solid fa-bullhorn text-amber-600 text-lg mb-1"></i>
+                                <span class="block text-xs font-bold text-slate-800">Pengumuman</span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- General Section Metadata -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <div class="sm:col-span-2">
+                        <label for="form-title" class="block text-xs font-bold uppercase text-slate-600 mb-1">Judul Bagian *</label>
+                        <input type="text" id="form-title" required placeholder="Contoh: Kanal Media Sosial Resmi" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm">
+                    </div>
+                    <div>
+                        <label for="form-badge" class="block text-xs font-bold uppercase text-slate-600 mb-1">Badge Kategori</label>
+                        <input type="text" id="form-badge" placeholder="INFORMASI" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 items-center">
+                    <div class="sm:col-span-2">
+                        <label for="form-subtitle" class="block text-xs font-bold uppercase text-slate-600 mb-1">Subjudul / Deskripsi Singkat</label>
+                        <input type="text" id="form-subtitle" placeholder="Keterangan singkat di bawah judul bagian..." class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Status Publikasi</label>
+                        <select id="form-visible" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm bg-white font-semibold">
+                            <option value="true">Publikasikan (Tampil)</option>
+                            <option value="false">Sembunyikan (Draft)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Dynamic Specific Fields -->
+                <div id="dynamic-template-fields" class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-3">
+                    <!-- Rendered dynamically -->
+                </div>
+
+                <div class="flex items-center justify-end gap-3 pt-3 border-t border-slate-200">
+                    <button type="button" onclick="closeSectionModal()" class="px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-sm font-semibold cursor-pointer">
+                        Batal
+                    </button>
+                    <button type="submit" class="px-5 py-2.5 rounded-xl bg-amber-600 hover:bg-amber-500 text-white text-sm font-bold shadow transition flex items-center gap-2 cursor-pointer">
+                        <i class="fa-solid fa-check"></i>
+                        <span>Simpan Bagian</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ==================== MODAL 4: CONFIRMATION DIALOG ==================== -->
+    <div id="confirm-modal" class="hidden fixed inset-0 z-50 bg-slate-950/75 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full p-6 border border-slate-200">
+            <div class="w-12 h-12 rounded-2xl bg-rose-100 text-rose-600 flex items-center justify-center mb-4">
+                <i class="fa-solid fa-triangle-exclamation text-xl"></i>
+            </div>
+            <h3 id="confirm-modal-title" class="font-heading font-bold text-lg text-slate-900 mb-2">Konfirmasi Tindakan</h3>
+            <p id="confirm-modal-message" class="text-sm text-slate-600 mb-6">Apakah Anda yakin ingin melanjutkan?</p>
+            <div class="flex items-center justify-end gap-3">
+                <button onclick="closeConfirmModal()" class="px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-sm font-semibold cursor-pointer">
+                    Batal
+                </button>
+                <button id="confirm-modal-action-btn" class="px-4 py-2.5 rounded-xl bg-rose-600 hover:bg-rose-700 text-white text-sm font-bold shadow cursor-pointer">
+                    Ya, Lanjutkan
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== MODAL 5: UBAH SANDI ADMIN ==================== -->
+    <div id="password-modal" class="hidden fixed inset-0 z-50 overflow-y-auto bg-slate-950/75 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full overflow-hidden border border-slate-200">
+            <div class="bg-slate-900 text-white px-6 py-4 flex items-center justify-between">
+                <div class="flex items-center gap-2.5">
+                    <span class="w-8 h-8 rounded-lg bg-amber-600 flex items-center justify-center">
+                        <i class="fa-solid fa-key text-sm"></i>
+                    </span>
+                    <h3 class="font-heading font-bold text-lg">Ubah Sandi Panel Admin</h3>
+                </div>
+                <button onclick="closePasswordModal()" class="text-slate-400 hover:text-white p-1.5 rounded-lg cursor-pointer">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+
+            <form onsubmit="handlePasswordChangeSubmit(event)" autocomplete="off" class="p-6 space-y-4">
+                <div class="p-3.5 rounded-xl bg-amber-50 border border-amber-200 text-xs text-amber-900 flex items-start gap-2.5">
+                    <i class="fa-solid fa-circle-info text-amber-600 mt-0.5 text-sm"></i>
+                    <span>Sandi minimal 8 karakter. Setelah diubah, klik <b>Ekspor HTML Publik</b> dan unggah ulang file-nya agar sandi baru juga berlaku di situs yang sudah dipublikasikan.</span>
+                </div>
+
+                <div>
+                    <label for="pw-current" class="block text-xs font-bold uppercase text-slate-600 mb-1">Sandi Saat Ini</label>
+                    <input type="password" id="pw-current" required autocomplete="off" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm">
+                </div>
+                <div>
+                    <label for="pw-new" class="block text-xs font-bold uppercase text-slate-600 mb-1">Sandi Baru</label>
+                    <input type="password" id="pw-new" required minlength="8" autocomplete="new-password" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm">
+                </div>
+                <div>
+                    <label for="pw-confirm" class="block text-xs font-bold uppercase text-slate-600 mb-1">Ulangi Sandi Baru</label>
+                    <input type="password" id="pw-confirm" required minlength="8" autocomplete="new-password" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm">
+                </div>
+
+                <label class="flex items-center gap-2 text-xs text-slate-600 cursor-pointer select-none">
+                    <input type="checkbox" onchange="togglePasswordVisibility(this.checked)" class="rounded border-slate-300">
+                    Tampilkan sandi
+                </label>
+
+                <p id="pw-error" class="hidden text-xs font-semibold text-rose-600">
+                    <i class="fa-solid fa-circle-exclamation mr-1"></i><span id="pw-error-text"></span>
+                </p>
+
+                <div class="flex items-center justify-end gap-3 pt-3 border-t border-slate-200">
+                    <button type="button" onclick="closePasswordModal()" class="px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-sm font-semibold cursor-pointer">
+                        Batal
+                    </button>
+                    <button type="submit" class="px-5 py-2.5 rounded-xl bg-amber-600 hover:bg-amber-500 text-white text-sm font-bold shadow transition cursor-pointer">
+                        Simpan Sandi Baru
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ==================== TOAST NOTIFICATION CONTAINER ==================== -->
+    <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+    <!-- ==================== MODUL SANDI ADMIN (hash + batas percobaan login) ==================== -->
+    <script id="admin-password-module">
+        const ADMIN_CRED_KEY = 'saka_bhayangkara_admin_cred_v1';
+        const ADMIN_LOCK_KEY = 'saka_bhayangkara_admin_lock_v1';
+        const ADMIN_CRED_DEFAULT = null; // otomatis terisi hash sandi saat "Ekspor HTML Publik"
+        const PBKDF2_ITERATIONS = 150000;
+        const LOGIN_MAX_ATTEMPTS = 5;
+        const LOGIN_LOCK_MS = 60000;
+        const BUILTIN_PASSCODES = ['bhayangkara2026', 'admin123'];
+
+        function bytesToHex(buf) {
+            return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
+        }
+
+        function randomSaltHex() {
+            const arr = new Uint8Array(16);
+            if (window.crypto && crypto.getRandomValues) crypto.getRandomValues(arr);
+            else for (let i = 0; i < arr.length; i++) arr[i] = Math.floor(Math.random() * 256);
+            return bytesToHex(arr);
+        }
+
+        // Cadangan bila browser tidak menyediakan crypto.subtle (lebih lemah dari PBKDF2)
+        function fallbackHash(str) {
+            let h1 = 0xdeadbeef, h2 = 0x41c6ce57;
+            for (let r = 0; r < 2000; r++) {
+                for (let i = 0; i < str.length; i++) {
+                    const ch = str.charCodeAt(i);
+                    h1 = Math.imul(h1 ^ ch, 2654435761);
+                    h2 = Math.imul(h2 ^ ch, 1597334677);
+                }
+                h1 = Math.imul(h1 ^ (h1 >>> 16), 2246822507) ^ Math.imul(h2 ^ (h2 >>> 13), 3266489909);
+                h2 = Math.imul(h2 ^ (h2 >>> 16), 2246822507) ^ Math.imul(h1 ^ (h1 >>> 13), 3266489909);
+            }
+            return (h2 >>> 0).toString(16).padStart(8, '0') + (h1 >>> 0).toString(16).padStart(8, '0');
+        }
+
+        function hasSubtleCrypto() {
+            return !!(window.crypto && crypto.subtle && window.TextEncoder);
+        }
+
+        async function hashPassword(password, salt, algo) {
+            if (algo === 'pbkdf2') {
+                const enc = new TextEncoder();
+                const key = await crypto.subtle.importKey('raw', enc.encode(password), 'PBKDF2', false, ['deriveBits']);
+                const bits = await crypto.subtle.deriveBits(
+                    { name: 'PBKDF2', salt: enc.encode(salt), iterations: PBKDF2_ITERATIONS, hash: 'SHA-256' },
+                    key, 256
+                );
+                return bytesToHex(bits);
+            }
+            return fallbackHash(salt + ':' + password);
+        }
+
+        async function createCredential(password) {
+            const algo = hasSubtleCrypto() ? 'pbkdf2' : 'fallback';
+            const salt = randomSaltHex();
+            return { algo, salt, hash: await hashPassword(password, salt, algo) };
+        }
+
+        function isValidCredential(c) {
+            return !!(c && typeof c.algo === 'string' && typeof c.salt === 'string' && typeof c.hash === 'string');
+        }
+
+        // null = masih memakai sandi bawaan
+        function getActiveCredential() {
+            try {
+                const raw = localStorage.getItem(ADMIN_CRED_KEY);
+                if (raw) {
+                    const c = JSON.parse(raw);
+                    if (isValidCredential(c)) return c;
+                }
+            } catch (e) { /* abaikan */ }
+            return isValidCredential(ADMIN_CRED_DEFAULT) ? ADMIN_CRED_DEFAULT : null;
+        }
+
+        async function verifyPasscode(input) {
+            const cred = getActiveCredential();
+            if (!cred) return BUILTIN_PASSCODES.includes(input);
+            if (cred.algo === 'pbkdf2' && !hasSubtleCrypto()) return false;
+            try {
+                const h = await hashPassword(input, cred.salt, cred.algo);
+                return h === cred.hash;
+            } catch (e) {
+                return false;
+            }
+        }
+
+        // ----- Batas percobaan login -----
+        function getLockState() {
+            try {
+                const s = JSON.parse(localStorage.getItem(ADMIN_LOCK_KEY));
+                if (s && typeof s.count === 'number' && typeof s.until === 'number') return s;
+            } catch (e) { /* abaikan */ }
+            return { count: 0, until: 0 };
+        }
+
+        function setLockState(s) {
+            try { localStorage.setItem(ADMIN_LOCK_KEY, JSON.stringify(s)); } catch (e) { /* abaikan */ }
+        }
+
+        function getLoginLockSeconds() {
+            const left = getLockState().until - Date.now();
+            return left > 0 ? Math.ceil(left / 1000) : 0;
+        }
+
+        function resetLoginFailures() {
+            setLockState({ count: 0, until: 0 });
+        }
+
+        function showLoginError(message) {
+            const errEl = document.getElementById('login-error-msg');
+            const txt = document.getElementById('login-error-text');
+            if (txt) txt.textContent = message;
+            if (errEl) errEl.classList.remove('hidden');
+        }
+
+        function registerLoginFailure() {
+            const s = getLockState();
+            s.count += 1;
+            if (s.count >= LOGIN_MAX_ATTEMPTS) {
+                s.count = 0;
+                s.until = Date.now() + LOGIN_LOCK_MS;
+                showLoginError(`Terlalu banyak percobaan. Coba lagi dalam ${Math.ceil(LOGIN_LOCK_MS / 1000)} detik.`);
+            }
+            setLockState(s);
+        }
+
+        // Petunjuk sandi bawaan hanya tampil selama sandi belum diganti
+        function updateLoginHints() {
+            const isDefault = !getActiveCredential();
+            const hint = document.getElementById('login-default-hint');
+            const txt = document.getElementById('login-error-text');
+            if (hint) hint.classList.toggle('hidden', !isDefault);
+            if (txt) txt.textContent = isDefault
+                ? 'Kode akses tidak valid. Gunakan: bhayangkara2026'
+                : 'Kode akses tidak valid.';
+        }
+
+        // ----- Modal Ubah Sandi -----
+        function openPasswordModal() {
+            ['pw-current', 'pw-new', 'pw-confirm'].forEach(id => {
+                const el = document.getElementById(id);
+                el.value = '';
+                el.type = 'password';
+            });
+            const cb = document.querySelector('#password-modal input[type="checkbox"]');
+            if (cb) cb.checked = false;
+            document.getElementById('pw-error').classList.add('hidden');
+            document.getElementById('password-modal').classList.remove('hidden');
+            setTimeout(() => document.getElementById('pw-current').focus(), 80);
+        }
+
+        function closePasswordModal() {
+            document.getElementById('password-modal').classList.add('hidden');
+        }
+
+        function togglePasswordVisibility(show) {
+            ['pw-current', 'pw-new', 'pw-confirm'].forEach(id => {
+                document.getElementById(id).type = show ? 'text' : 'password';
+            });
+        }
+
+        async function handlePasswordChangeSubmit(e) {
+            e.preventDefault();
+            const cur = document.getElementById('pw-current').value.trim();
+            const next = document.getElementById('pw-new').value.trim();
+            const conf = document.getElementById('pw-confirm').value.trim();
+            const errBox = document.getElementById('pw-error');
+            const errTxt = document.getElementById('pw-error-text');
+            const fail = (msg) => { errTxt.textContent = msg; errBox.classList.remove('hidden'); };
+            errBox.classList.add('hidden');
+
+            if (!(await verifyPasscode(cur))) return fail('Sandi saat ini salah.');
+            if (next.length < 8) return fail('Sandi baru minimal 8 karakter.');
+            if (next === cur) return fail('Sandi baru harus berbeda dari sandi saat ini.');
+            if (BUILTIN_PASSCODES.includes(next)) return fail('Sandi baru tidak boleh sama dengan sandi bawaan.');
+            if (next !== conf) return fail('Konfirmasi sandi baru tidak cocok.');
+
+            const cred = await createCredential(next);
+            try {
+                localStorage.setItem(ADMIN_CRED_KEY, JSON.stringify(cred));
+            } catch (err) {
+                return fail('Gagal menyimpan sandi ke browser.');
+            }
+
+            resetLoginFailures();
+            updateLoginHints();
+            closePasswordModal();
+            showToast('Sandi berhasil diubah. Klik "Ekspor HTML Publik" agar berlaku di situs yang dipublikasikan.', 'success');
+        }
+
+        document.addEventListener('DOMContentLoaded', updateLoginHints);
+    </script>
+
+    <!-- ==================== APPLICATION LOGIC ==================== -->
+    <script>
+        const STORAGE_KEY = 'saka_bhayangkara_jatinegara_cms_v2';
+        const ADMIN_SESSION_KEY = 'saka_bhayangkara_admin_auth';
+        const ADMIN_PASSCODE = 'bhayangkara2026';
+
+        let isAdminAuthenticated = sessionStorage.getItem(ADMIN_SESSION_KEY) === 'true';
+        let isInlineEditEnabled = true;
+
+        // Default Portal Data
+        const defaultCMSData = {
+            hero: {
+                badge: "Pangkalan Polsek Jatinegara • Polres Metro Jakarta Timur",
+                title: "Membentuk Generasi Muda Disiplin, Tangguh, dan Peduli Kamtibmas",
+                subtitle: "Wadah pendidikan dan pembinaan bagi Pramuka Penegak dan Pandega dalam meningkatkan pengetahuan serta keterampilan praktis di bidang kebhayangkaraan untuk mendukung keamanan dan ketertiban masyarakat di wilayah Jatinegara.",
+                stats: [
+                    { value: "4 Krida", label: "Bidang Keterampilan Khusus" },
+                    { value: "Polsek", label: "Pangkalan Jatinegara" },
+                    { value: "Penegak", label: "& Pandega Aktif" },
+                    { value: "24/7", label: "Siaga Bakti Masyarakat" }
+                ]
+            },
+            sections: [
+                {
+                    id: "sec-tentang",
+                    type: "about",
+                    visible: true,
+                    badge: "PROFIL SATUAN KARYA",
+                    title: "Tentang Saka Bhayangkara Jatinegara",
+                    subtitle: "Sinergi Kepolisian Negara Republik Indonesia dan Gerakan Pramuka Kwartir Ranting Jatinegara dalam membentuk kader muda berkarakter.",
+                    cards: [
+                        {
+                            icon: "fa-shield-halved",
+                            title: "Visi & Misi Pembinaan",
+                            desc: "Mewujudkan generasi muda Pramuka yang memiliki kesadaran hukum tinggi, disiplin, terampil, dan siap membantu tugas-tugas pemeliharaan keamanan dan ketertiban masyarakat."
+                        },
+                        {
+                            icon: "fa-users-gear",
+                            title: "Struktur & Pangkalan",
+                            desc: "Dibina langsung oleh Pamong Saka dan Instruktur dari jajaran Polsek Jatinegara bersama Dewan Saka Bhayangkara Ranting Jatinegara."
+                        },
+                        {
+                            icon: "fa-award",
+                            title: "Bakti & Pengabdian",
+                            desc: "Berperan aktif dalam Operasi Lilin, Operasi Ketupat, pengaturan lalu lintas sekolah, serta edukasi pencegahan kenakalan remaja."
+                        }
+                    ]
+                },
+                {
+                    id: "sec-krida",
+                    type: "krida",
+                    visible: true,
+                    badge: "4 KRIDA UTAMA",
+                    title: "Krida Saka Bhayangkara",
+                    subtitle: "Empat bidang keterampilan kebhayangkaraan yang dilatihkan secara terstruktur kepada seluruh anggota Saka Bhayangkara Jatinegara.",
+                    items: [
+                        {
+                            code: "KRIDA 01",
+                            name: "Krida Ketertiban Masyarakat (Tibmas)",
+                            icon: "fa-user-shield",
+                            description: "Membekali anggota dengan kemampuan pengamanan lingkungan, pengaturan massa, penjagaan, dan pengawalan dasar."
+                        },
+                        {
+                            code: "KRIDA 02",
+                            name: "Krida Lalu Lintas (Lantas)",
+                            icon: "fa-traffic-light",
+                            description: "Pelatihan 12 gerakan pengaturan lalu lintas, pemahaman rambu-rambu jalan, serta kampanye keselamatan berkendara."
+                        },
+                        {
+                            code: "KRIDA 03",
+                            name: "Krida Pencegahan & Penanggulangan Bencana (PPB)",
+                            icon: "fa-kit-medical",
+                            description: "Keterampilan SAR dasar, pertolongan pertama gawat darurat (PPGD), penanganan kebakaran ringan, dan evakuasi bencana."
+                        },
+                        {
+                            code: "KRIDA 04",
+                            name: "Krida Tindakan Pertama Tempat Kejadian Perkara (TPTKP)",
+                            icon: "fa-magnifying-glass-location",
+                            description: "Pemahaman pengamanan status quo TKP, pengamatan serta penggambaran situasi awal sebelum petugas penyidik tiba."
+                        }
+                    ]
+                },
+                {
+                    id: "sec-jadwal",
+                    type: "schedule",
+                    visible: true,
+                    badge: "AGENDA PEMBINAAN",
+                    title: "Jadwal Latihan & Kegiatan Rutin",
+                    subtitle: "Pelaksanaan latihan rutin mingguan dan pembinaan fisik maupun materi kebhayangkaraan.",
+                    schedules: [
+                        {
+                            day: "Sabtu",
+                            time: "13.00 – 17.00 WIB",
+                            activity: "Latihan Rutin Materi Krida & Peraturan Baris-Berbaris (PBB)",
+                            location: "Halaman Apel Polsek Jatinegara"
+                        },
+                        {
+                            day: "Minggu (Tentatif)",
+                            time: "07.00 – 11.00 WIB",
+                            activity: "Bakti Masyarakat, Pengaturan Lalu Lintas & Simulasi PPB",
+                            location: "Wilayah Kecamatan Jatinegara"
+                        }
+                    ]
+                },
+                {
+                    id: "sec-medsos",
+                    type: "social",
+                    visible: true,
+                    badge: "KANAL RESMI",
+                    title: "Media Sosial & Dokumentasi",
+                    subtitle: "Ikuti publikasi kegiatan, dokumentasi latihan, dan informasi penerimaan anggota baru Saka Bhayangkara Jatinegara.",
+                    socials: [
+                        {
+                            platform: "Instagram Resmi",
+                            handle: "@sakabhayangkara_jatinegara",
+                            url: "https://instagram.com",
+                            icon: "fa-brands fa-instagram",
+                            color: "from-pink-600 to-amber-600"
+                        },
+                        {
+                            platform: "WhatsApp Sekretariat",
+                            handle: "+62 812-8899-4510 (Dewan Saka)",
+                            url: "https://wa.me/6281288994510",
+                            icon: "fa-brands fa-whatsapp",
+                            color: "from-emerald-600 to-teal-700"
+                        },
+                        {
+                            platform: "YouTube Channel",
+                            handle: "Saka Bhayangkara Jatinegara",
+                            url: "https://youtube.com",
+                            icon: "fa-brands fa-youtube",
+                            color: "from-red-600 to-rose-700"
+                        }
+                    ],
+                    address: "Sanggar Bakti Saka Bhayangkara: Polsek Jatinegara, Jl. Otista Raya No.1, Bidara Cina, Kec. Jatinegara, Jakarta Timur"
+                },
+                {
+                    id: "sec-kontak",
+                    type: "contact",
+                    visible: true,
+                    badge: "HUBUNGI KAMI",
+                    title: "Kontak & Markas Pangkalan",
+                    subtitle: "Informasi pendaftaran calon anggota baru (Pramuka Penegak/Pandega) dan koordinasi kegiatan.",
+                    phone: "+62 812-8899-4510 (Humas Dewan Saka)",
+                    email: "sakabhayangkara.jatinegara@gmail.com",
+                    address: "Polsek Jatinegara, Jl. Otista Raya No.1, Kel. Bidara Cina, Kec. Jatinegara, Kota Jakarta Timur 13330"
+                }
+            ]
+        };
+
+        let cmsState = loadCMSState();
+
+        function loadCMSState() {
+            try {
+                const raw = localStorage.getItem(STORAGE_KEY);
+                if (raw) {
+                    const parsed = JSON.parse(raw);
+                    if (parsed && parsed.hero && Array.isArray(parsed.sections)) {
+                        return parsed;
+                    }
+                }
+            } catch (e) {
+                console.error("Gagal membaca localStorage:", e);
+            }
+            return JSON.parse(JSON.stringify(defaultCMSData));
+        }
+
+        function saveCMSState(notify = false) {
+            try {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(cmsState));
+                if (notify) {
+                    showToast("Perubahan berhasil disimpan.", "success");
+                }
+            } catch (e) {
+                showToast("Gagal menyimpan data ke browser.", "error");
+            }
+        }
+
+        // ==================== ROUTING & ADMIN AUTHENTICATION (#admin) ====================
+        function isAdminRoute() {
+            return window.location.hash.toLowerCase() === '#admin';
+        }
+
+        function isInActiveAdminMode() {
+            return isAdminRoute() && isAdminAuthenticated;
+        }
+
+        function handleHashRouting() {
+            const loginModal = document.getElementById('admin-login-modal');
+
+            if (isAdminRoute()) {
+                if (!isAdminAuthenticated) {
+                    // Show login gate
+                    loginModal.classList.remove('hidden');
+                    setTimeout(() => {
+                        const input = document.getElementById('admin-passcode');
+                        if (input) input.focus();
+                    }, 100);
+                } else {
+                    loginModal.classList.add('hidden');
+                }
+            } else {
+                loginModal.classList.add('hidden');
+            }
+
+            renderApp();
+        }
+
+        function navigateToAdmin(e) {
+            if (e) e.preventDefault();
+            window.location.hash = 'admin';
+        }
+
+        async function handleAdminLogin(e) {
+            e.preventDefault();
+            const input = document.getElementById('admin-passcode');
+            const errEl = document.getElementById('login-error-msg');
+            const value = input.value.trim();
+
+            const lockLeft = getLoginLockSeconds();
+            if (lockLeft > 0) {
+                showLoginError(`Terlalu banyak percobaan. Coba lagi dalam ${lockLeft} detik.`);
+                return;
+            }
+
+            if (await verifyPasscode(value)) {
+                resetLoginFailures();
+                isAdminAuthenticated = true;
+                sessionStorage.setItem(ADMIN_SESSION_KEY, 'true');
+                errEl.classList.add('hidden');
+                input.value = '';
+                document.getElementById('admin-login-modal').classList.add('hidden');
+                showToast("Selamat datang di Panel Admin Saka Bhayangkara Jatinegara!", "success");
+                if (!getActiveCredential()) {
+                    setTimeout(() => showToast("Anda masih memakai sandi bawaan. Klik \"Ubah Sandi\" di bilah admin.", "info"), 1200);
+                }
+                renderApp();
+            } else {
+                updateLoginHints();
+                registerLoginFailure();
+                errEl.classList.remove('hidden');
+                input.focus();
+            }
+        }
+
+        function cancelAdminLogin() {
+            document.getElementById('admin-login-modal').classList.add('hidden');
+            history.replaceState(null, '', window.location.pathname + window.location.search);
+            renderApp();
+        }
+
+        function exitAdminMode() {
+            // Switch URL cleanly back to public view
+            history.replaceState(null, '', window.location.pathname + window.location.search);
+            showToast("Beralih ke Tampilan Publik bersih.", "info");
+            renderApp();
+        }
+
+        function toggleInlineEdit() {
+            isInlineEditEnabled = !isInlineEditEnabled;
+            const btn = document.getElementById('toggle-inline-btn');
+            const label = document.getElementById('toggle-inline-text');
+
+            if (isInlineEditEnabled) {
+                btn.classList.remove('bg-slate-700');
+                btn.classList.add('bg-indigo-600');
+                label.textContent = 'Edit Teks Langsung: ON';
+                showToast("Edit teks langsung diaktifkan. Klik teks pada halaman untuk mengedit.", "info");
+            } else {
+                btn.classList.remove('bg-indigo-600');
+                btn.classList.add('bg-slate-700');
+                label.textContent = 'Edit Teks Langsung: OFF';
+                showToast("Edit teks langsung dinonaktifkan.", "info");
+            }
+            renderApp();
+        }
+
+        // ==================== RENDERING ENGINE ====================
+        function renderApp() {
+            const adminMode = isInActiveAdminMode();
+            const inlineActive = adminMode && isInlineEditEnabled;
+
+            // Toggle Admin UI Bars
+            const adminTopBar = document.getElementById('admin-workspace-bar');
+            const adminBottomBar = document.getElementById('admin-bottom-bar');
+            const navbar = document.getElementById('main-navbar');
+
+            if (adminMode) {
+                adminTopBar.classList.remove('hidden');
+                adminBottomBar.classList.remove('hidden');
+                navbar.classList.remove('top-0');
+                navbar.classList.add('top-[58px]');
+            } else {
+                adminTopBar.classList.add('hidden');
+                adminBottomBar.classList.add('hidden');
+                navbar.classList.remove('top-[58px]');
+                navbar.classList.add('top-0');
+            }
+
+            if (inlineActive) {
+                document.body.classList.add('admin-inline-active');
+            } else {
+                document.body.classList.remove('admin-inline-active');
+            }
+
+            // Render Hero Content
+            const heroBadge = document.getElementById('hero-badge');
+            const heroTitle = document.getElementById('hero-title');
+            const heroSubtitle = document.getElementById('hero-subtitle');
+
+            heroBadge.textContent = cmsState.hero.badge;
+            heroTitle.textContent = cmsState.hero.title;
+            heroSubtitle.textContent = cmsState.hero.subtitle;
+
+            [heroBadge, heroTitle, heroSubtitle].forEach(el => {
+                if (inlineActive) {
+                    el.setAttribute('contenteditable', 'true');
+                    el.setAttribute('data-editable', 'true');
+                } else {
+                    el.removeAttribute('contenteditable');
+                    el.removeAttribute('data-editable');
+                }
+            });
+
+            // Render Hero Stats
+            const statsGrid = document.getElementById('hero-stats-grid');
+            statsGrid.innerHTML = (cmsState.hero.stats || []).map((st, idx) => `
+                <div class="p-3.5 rounded-2xl bg-slate-900/80 border border-slate-700/70">
+                    <span ${inlineActive ? `contenteditable="true" data-editable="true" data-hero-stat="${idx}" data-stat-field="value"` : ''} class="font-heading font-extrabold text-xl sm:text-2xl text-amber-400 block">
+                        ${escapeHTML(st.value)}
+                    </span>
+                    <span ${inlineActive ? `contenteditable="true" data-editable="true" data-hero-stat="${idx}" data-stat-field="label"` : ''} class="text-xs text-slate-300 mt-0.5 block">
+                        ${escapeHTML(st.label)}
+                    </span>
+                </div>
+            `).join('');
+
+            // Render Navigation (Only visible sections in public, all in admin)
+            renderNavigation();
+
+            // Render Sections
+            const container = document.getElementById('cms-sections-container');
+            container.innerHTML = '';
+
+            const sectionsToRender = adminMode
+                ? cmsState.sections
+                : cmsState.sections.filter(s => s.visible !== false);
+
+            sectionsToRender.forEach((sec, visibleIdx) => {
+                const actualIndex = cmsState.sections.findIndex(s => s.id === sec.id);
+                const isHiddenDraft = sec.visible === false;
+
+                const sectionEl = document.createElement('section');
+                sectionEl.id = sec.id;
+                sectionEl.className = `admin-section-frame py-16 sm:py-20 transition-colors ${
+                    visibleIdx % 2 === 1 ? 'bg-slate-100/80' : 'bg-white'
+                } ${isHiddenDraft && adminMode ? 'opacity-65 bg-slate-200/60' : ''}`;
+
+                // Admin Section Control Toolbar (Strictly hidden in Public View)
+                let adminToolbarHTML = '';
+                if (adminMode) {
+                    adminToolbarHTML = `
+                        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-6">
+                            <div class="inline-flex flex-wrap items-center gap-1.5 p-1.5 rounded-2xl bg-slate-900 text-white shadow-xl border border-slate-700">
+                                <span class="px-3 py-1 text-[11px] font-extrabold uppercase tracking-wider text-amber-400">
+                                    Bagian #${actualIndex + 1}
+                                </span>
+                                <span class="px-2 py-0.5 rounded-md text-[10px] font-bold ${isHiddenDraft ? 'bg-rose-500/20 text-rose-300' : 'bg-emerald-500/20 text-emerald-300'}">
+                                    ${isHiddenDraft ? 'DRAFT (TERSEMBUNYI)' : 'PUBLIK'}
+                                </span>
+                                <div class="h-4 w-[1px] bg-slate-700 mx-1"></div>
+                                <button onclick="moveSection(${actualIndex}, -1)" ${actualIndex === 0 ? 'disabled' : ''} class="p-2 rounded-xl hover:bg-slate-800 disabled:opacity-30 text-xs transition cursor-pointer" title="Geser ke Atas">
+                                    <i class="fa-solid fa-arrow-up"></i>
+                                </button>
+                                <button onclick="moveSection(${actualIndex}, 1)" ${actualIndex === cmsState.sections.length - 1 ? 'disabled' : ''} class="p-2 rounded-xl hover:bg-slate-800 disabled:opacity-30 text-xs transition cursor-pointer" title="Geser ke Bawah">
+                                    <i class="fa-solid fa-arrow-down"></i>
+                                </button>
+                                <button onclick="toggleSectionVisibility('${sec.id}')" class="px-2.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold flex items-center gap-1.5 transition cursor-pointer" title="Ubah Status Publikasi">
+                                    <i class="fa-solid ${isHiddenDraft ? 'fa-eye' : 'fa-eye-slash'} text-amber-400"></i>
+                                    <span>${isHiddenDraft ? 'Tampilkan' : 'Sembunyikan'}</span>
+                                </button>
+                                <button onclick="openEditSectionModal('${sec.id}')" class="px-2.5 py-1.5 rounded-xl bg-amber-600 hover:bg-amber-500 text-xs font-semibold flex items-center gap-1.5 transition cursor-pointer">
+                                    <i class="fa-solid fa-pen"></i>
+                                    <span>Edit Bagian</span>
+                                </button>
+                                <button onclick="confirmDeleteSection('${sec.id}')" class="px-2.5 py-1.5 rounded-xl bg-crimson-700 hover:bg-crimson-600 text-xs font-semibold flex items-center gap-1.5 transition cursor-pointer">
+                                    <i class="fa-solid fa-trash"></i>
+                                    <span>Hapus</span>
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                }
+
+                const editAttr = inlineActive ? 'contenteditable="true" data-editable="true"' : '';
+
+                const sectionHeaderHTML = `
+                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-10 sm:mb-12">
+                        <span ${editAttr} data-sec-id="${sec.id}" data-field="badge" class="inline-block px-3.5 py-1 rounded-full bg-amber-100 text-amber-900 border border-amber-300/70 font-bold text-xs tracking-wider uppercase mb-3">
+                            ${escapeHTML(sec.badge || 'INFORMASI')}
+                        </span>
+                        <h2 ${editAttr} data-sec-id="${sec.id}" data-field="title" class="font-heading text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mb-3">
+                            ${escapeHTML(sec.title)}
+                        </h2>
+                        <p ${editAttr} data-sec-id="${sec.id}" data-field="subtitle" class="text-slate-600 text-base sm:text-lg max-w-3xl leading-relaxed">
+                            ${escapeHTML(sec.subtitle || '')}
+                        </p>
+                    </div>
+                `;
+
+                const sectionBodyHTML = renderSectionTemplate(sec, editAttr, adminMode);
+
+                sectionEl.innerHTML = adminToolbarHTML + sectionHeaderHTML + sectionBodyHTML;
+                container.appendChild(sectionEl);
+            });
+
+            if (inlineActive) {
+                attachInlineListeners();
+            }
+        }
+
+        function renderSectionTemplate(sec, editAttr, adminMode) {
+            if (sec.type === 'about') {
+                return `
+                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            ${(sec.cards || []).map((card, i) => `
+                                <div class="p-6 sm:p-8 rounded-2xl bg-white border border-slate-200 shadow-sm hover:shadow-md transition">
+                                    <div class="w-12 h-12 rounded-2xl bg-slate-900 text-amber-400 flex items-center justify-center text-xl mb-5 shadow">
+                                        <i class="fa-solid ${escapeHTML(card.icon || 'fa-shield-halved')}"></i>
+                                    </div>
+                                    <h3 ${editAttr} data-sec-id="${sec.id}" data-array="cards" data-idx="${i}" data-field="title" class="font-heading font-bold text-lg text-slate-900 mb-2.5">
+                                        ${escapeHTML(card.title)}
+                                    </h3>
+                                    <p ${editAttr} data-sec-id="${sec.id}" data-array="cards" data-idx="${i}" data-field="desc" class="text-sm text-slate-600 leading-relaxed">
+                                        ${escapeHTML(card.desc)}
+                                    </p>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            }
+
+            if (sec.type === 'krida') {
+                return `
+                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                            ${(sec.items || []).map((item, i) => `
+                                <div class="group p-6 rounded-2xl bg-white border border-slate-200 hover:border-amber-600 shadow-sm hover:shadow-xl transition flex flex-col justify-between">
+                                    <div>
+                                        <div class="flex items-center justify-between mb-5">
+                                            <span class="text-xs font-extrabold tracking-widest text-crimson-700 bg-rose-50 px-2.5 py-1 rounded-lg border border-rose-200">
+                                                ${escapeHTML(item.code)}
+                                            </span>
+                                            <div class="w-11 h-11 rounded-xl bg-slate-900 group-hover:bg-amber-600 text-white flex items-center justify-center transition shadow-sm">
+                                                <i class="fa-solid ${escapeHTML(item.icon)}"></i>
+                                            </div>
+                                        </div>
+                                        <h3 ${editAttr} data-sec-id="${sec.id}" data-array="items" data-idx="${i}" data-field="name" class="font-heading font-bold text-lg text-slate-900 mb-2.5 leading-snug">
+                                            ${escapeHTML(item.name)}
+                                        </h3>
+                                        <p ${editAttr} data-sec-id="${sec.id}" data-array="items" data-idx="${i}" data-field="description" class="text-sm text-slate-600 leading-relaxed">
+                                            ${escapeHTML(item.description)}
+                                        </p>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            }
+
+            if (sec.type === 'schedule') {
+                return `
+                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+                            <div class="divide-y divide-slate-200">
+                                ${(sec.schedules || []).map((sch, i) => `
+                                    <div class="p-5 sm:p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:bg-slate-50 transition">
+                                        <div class="flex items-start gap-4">
+                                            <div class="px-4 py-2 rounded-xl bg-amber-100 text-amber-950 font-extrabold text-xs text-center min-w-[100px] border border-amber-300/60">
+                                                <span ${editAttr} data-sec-id="${sec.id}" data-array="schedules" data-idx="${i}" data-field="day">${escapeHTML(sch.day)}</span>
+                                            </div>
+                                            <div>
+                                                <h4 ${editAttr} data-sec-id="${sec.id}" data-array="schedules" data-idx="${i}" data-field="activity" class="font-heading font-bold text-slate-900 text-base">
+                                                    ${escapeHTML(sch.activity)}
+                                                </h4>
+                                                <p ${editAttr} data-sec-id="${sec.id}" data-array="schedules" data-idx="${i}" data-field="location" class="text-xs text-slate-500 mt-1">
+                                                    <i class="fa-solid fa-location-dot text-crimson-700 mr-1.5"></i>${escapeHTML(sch.location)}
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-900 text-white text-xs font-semibold self-start sm:self-center shadow-sm">
+                                            <i class="fa-regular fa-clock text-amber-400"></i>
+                                            <span ${editAttr} data-sec-id="${sec.id}" data-array="schedules" data-idx="${i}" data-field="time">${escapeHTML(sch.time)}</span>
+                                        </div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            if (sec.type === 'social') {
+                return `
+                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                            ${(sec.socials || []).map((soc, i) => `
+                                <a href="${escapeHTML(soc.url || '#')}" target="_blank" rel="noopener noreferrer" ${adminMode ? 'onclick="event.preventDefault()"' : ''} class="group p-6 rounded-2xl bg-white border border-slate-200 hover:border-amber-600 shadow-sm hover:shadow-md transition flex items-center gap-4">
+                                    <div class="w-12 h-12 rounded-2xl bg-gradient-to-br ${soc.color || 'from-slate-800 to-slate-950'} text-white flex items-center justify-center text-xl shrink-0 shadow">
+                                        <i class="${escapeHTML(soc.icon || 'fa-solid fa-link')}"></i>
+                                    </div>
+                                    <div class="min-w-0">
+                                        <span ${editAttr} data-sec-id="${sec.id}" data-array="socials" data-idx="${i}" data-field="platform" class="block text-xs font-bold uppercase tracking-wider text-slate-400">
+                                            ${escapeHTML(soc.platform)}
+                                        </span>
+                                        <span ${editAttr} data-sec-id="${sec.id}" data-array="socials" data-idx="${i}" data-field="handle" class="block font-heading font-bold text-slate-900 group-hover:text-amber-700 truncate transition mt-0.5">
+                                            ${escapeHTML(soc.handle)}
+                                        </span>
+                                    </div>
+                                </a>
+                            `).join('')}
+                        </div>
+                        ${sec.address ? `
+                            <div class="p-5 sm:p-6 rounded-2xl bg-slate-900 text-slate-200 flex flex-col sm:flex-row items-start sm:items-center gap-4 border border-slate-800 shadow">
+                                <div class="w-11 h-11 rounded-xl bg-amber-600 text-white flex items-center justify-center shrink-0">
+                                    <i class="fa-solid fa-location-dot"></i>
+                                </div>
+                                <div>
+                                    <span class="text-xs font-bold uppercase tracking-wider text-amber-400 block">Alamat Sekretariat / Sanggar Bakti</span>
+                                    <p ${editAttr} data-sec-id="${sec.id}" data-field="address" class="text-sm text-slate-200 mt-1">${escapeHTML(sec.address)}</p>
+                                </div>
+                            </div>
+                        ` : ''}
+                    </div>
+                `;
+            }
+
+            if (sec.type === 'contact') {
+                return `
+                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div class="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm">
+                                <div class="w-11 h-11 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center text-lg mb-4">
+                                    <i class="fa-brands fa-whatsapp"></i>
+                                </div>
+                                <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Telepon / WhatsApp</span>
+                                <p ${editAttr} data-sec-id="${sec.id}" data-field="phone" class="font-heading font-bold text-slate-900 text-base mt-1">${escapeHTML(sec.phone || '-')}</p>
+                            </div>
+                            <div class="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm">
+                                <div class="w-11 h-11 rounded-xl bg-amber-100 text-amber-800 flex items-center justify-center text-lg mb-4">
+                                    <i class="fa-solid fa-envelope"></i>
+                                </div>
+                                <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Email Resmi</span>
+                                <p ${editAttr} data-sec-id="${sec.id}" data-field="email" class="font-heading font-bold text-slate-900 text-base mt-1 break-all">${escapeHTML(sec.email || '-')}</p>
+                            </div>
+                            <div class="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm">
+                                <div class="w-11 h-11 rounded-xl bg-rose-100 text-crimson-700 flex items-center justify-center text-lg mb-4">
+                                    <i class="fa-solid fa-building-shield"></i>
+                                </div>
+                                <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Lokasi Pangkalan</span>
+                                <p ${editAttr} data-sec-id="${sec.id}" data-field="address" class="font-heading font-bold text-slate-900 text-sm mt-1 leading-relaxed">${escapeHTML(sec.address || '-')}</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            // Default: announcement / custom block
+            return `
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="p-6 sm:p-8 rounded-2xl bg-white border-l-4 border-crimson-700 border border-slate-200 shadow-sm">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-2xl bg-amber-100 text-amber-800 flex items-center justify-center text-lg shrink-0">
+                                <i class="fa-solid fa-bullhorn"></i>
+                            </div>
+                            <div class="space-y-2 w-full">
+                                ${sec.date ? `<span ${editAttr} data-sec-id="${sec.id}" data-field="date" class="inline-block text-xs font-bold text-crimson-700 bg-rose-50 px-2.5 py-1 rounded-md"><i class="fa-regular fa-calendar mr-1.5"></i>${escapeHTML(sec.date)}</span>` : ''}
+                                <div ${editAttr} data-sec-id="${sec.id}" data-field="content" class="text-slate-700 text-sm sm:text-base leading-relaxed whitespace-pre-line pt-1">
+                                    ${escapeHTML(sec.content || 'Informasi resmi Saka Bhayangkara Jatinegara.')}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderNavigation() {
+            const desktopNav = document.getElementById('dynamic-nav-links');
+            const mobileNav = document.getElementById('mobile-nav-drawer');
+            const footerNav = document.getElementById('footer-nav-links');
+
+            const visibleSections = cmsState.sections.filter(s => s.visible !== false);
+
+            desktopNav.innerHTML = visibleSections.map(sec => {
+                const shortLabel = sec.title.length > 24 ? sec.title.substring(0, 22) + '...' : sec.title;
+                return `<a href="#${sec.id}" class="hover:text-amber-400 transition">${escapeHTML(shortLabel)}</a>`;
+            }).join('');
+
+            mobileNav.innerHTML = visibleSections.map(sec => `
+                <a href="#${sec.id}" onclick="toggleMobileMenu()" class="block px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-200 hover:bg-slate-800 hover:text-amber-400">
+                    ${escapeHTML(sec.title)}
+                </a>
+            `).join('');
+
+            footerNav.innerHTML = visibleSections.map(sec => `
+                <li><a href="#${sec.id}" class="hover:text-amber-400 transition">${escapeHTML(sec.title)}</a></li>
+            `).join('');
+        }
+
+        function toggleMobileMenu() {
+            document.getElementById('mobile-nav-drawer').classList.toggle('hidden');
+        }
+
+        // ==================== INLINE EDIT LISTENERS ====================
+        function attachInlineListeners() {
+            // Hero fields
+            document.querySelectorAll('[data-hero-field]').forEach(el => {
+                el.addEventListener('blur', () => {
+                    const field = el.getAttribute('data-hero-field');
+                    cmsState.hero[field] = el.textContent.trim();
+                    saveCMSState(false);
+                });
+            });
+
+            // Hero stats
+            document.querySelectorAll('[data-hero-stat]').forEach(el => {
+                el.addEventListener('blur', () => {
+                    const idx = parseInt(el.getAttribute('data-hero-stat'), 10);
+                    const field = el.getAttribute('data-stat-field');
+                    if (cmsState.hero.stats[idx]) {
+                        cmsState.hero.stats[idx][field] = el.textContent.trim();
+                        saveCMSState(false);
+                    }
+                });
+            });
+
+            // Section fields
+            document.querySelectorAll('[data-sec-id]').forEach(el => {
+                el.addEventListener('blur', () => {
+                    const secId = el.getAttribute('data-sec-id');
+                    const field = el.getAttribute('data-field');
+                    const arrayName = el.getAttribute('data-array');
+                    const idx = el.getAttribute('data-idx');
+
+                    const section = cmsState.sections.find(s => s.id === secId);
+                    if (!section) return;
+
+                    if (arrayName && idx !== null) {
+                        section[arrayName][parseInt(idx, 10)][field] = el.textContent.trim();
+                    } else {
+                        section[field] = el.textContent.trim();
+                    }
+
+                    saveCMSState(false);
+                    if (field === 'title') renderNavigation();
+                });
+            });
+        }
+
+        // ==================== ADMIN ACTIONS: HERO MODAL ====================
+        function openHeroModal() {
+            document.getElementById('hero-input-badge').value = cmsState.hero.badge || '';
+            document.getElementById('hero-input-title').value = cmsState.hero.title || '';
+            document.getElementById('hero-input-subtitle').value = cmsState.hero.subtitle || '';
+
+            const statsContainer = document.getElementById('hero-stats-inputs');
+            statsContainer.innerHTML = (cmsState.hero.stats || []).map((st, idx) => `
+                <div class="p-3 rounded-xl bg-slate-50 border border-slate-200 space-y-2">
+                    <span class="text-[11px] font-bold text-slate-400 uppercase">Statistik #${idx + 1}</span>
+                    <input type="text" id="hero-stat-val-${idx}" value="${escapeHTML(st.value)}" placeholder="Angka/Nilai" class="w-full px-3 py-1.5 rounded-lg border border-slate-300 text-sm font-bold">
+                    <input type="text" id="hero-stat-lbl-${idx}" value="${escapeHTML(st.label)}" placeholder="Keterangan" class="w-full px-3 py-1.5 rounded-lg border border-slate-300 text-xs">
+                </div>
+            `).join('');
+
+            document.getElementById('hero-modal').classList.remove('hidden');
+        }
+
+        function closeHeroModal() {
+            document.getElementById('hero-modal').classList.add('hidden');
+        }
+
+        function handleHeroFormSubmit(e) {
+            e.preventDefault();
+            cmsState.hero.badge = document.getElementById('hero-input-badge').value.trim();
+            cmsState.hero.title = document.getElementById('hero-input-title').value.trim();
+            cmsState.hero.subtitle = document.getElementById('hero-input-subtitle').value.trim();
+
+            cmsState.hero.stats = cmsState.hero.stats.map((_, idx) => ({
+                value: document.getElementById(`hero-stat-val-${idx}`).value.trim(),
+                label: document.getElementById(`hero-stat-lbl-${idx}`).value.trim()
+            }));
+
+            saveCMSState(true);
+            closeHeroModal();
+            renderApp();
+        }
+
+        // ==================== ADMIN ACTIONS: SECTION CRUD ====================
+        function moveSection(index, direction) {
+            const target = index + direction;
+            if (target < 0 || target >= cmsState.sections.length) return;
+
+            const temp = cmsState.sections[index];
+            cmsState.sections[index] = cmsState.sections[target];
+            cmsState.sections[target] = temp;
+
+            saveCMSState(true);
+            renderApp();
+        }
+
+        function toggleSectionVisibility(secId) {
+            const sec = cmsState.sections.find(s => s.id === secId);
+            if (!sec) return;
+            sec.visible = sec.visible === false ? true : false;
+            saveCMSState(true);
+            renderApp();
+        }
+
+        function confirmDeleteSection(secId) {
+            const sec = cmsState.sections.find(s => s.id === secId);
+            if (!sec) return;
+
+            document.getElementById('confirm-modal-title').textContent = 'Hapus Bagian Halaman?';
+            document.getElementById('confirm-modal-message').textContent = `Apakah Anda yakin ingin menghapus bagian "${sec.title}" secara permanen?`;
+
+            const btn = document.getElementById('confirm-modal-action-btn');
+            btn.onclick = () => {
+                cmsState.sections = cmsState.sections.filter(s => s.id !== secId);
+                saveCMSState(true);
+                renderApp();
+                closeConfirmModal();
+            };
+
+            document.getElementById('confirm-modal').classList.remove('hidden');
+        }
+
+        function openResetConfirmModal() {
+            document.getElementById('confirm-modal-title').textContent = 'Reset Data ke Pengaturan Awal?';
+            document.getElementById('confirm-modal-message').textContent = 'Semua perubahan kustom akan dihapus dan halaman dikembalikan ke konten default Saka Bhayangkara Jatinegara.';
+
+            const btn = document.getElementById('confirm-modal-action-btn');
+            btn.onclick = () => {
+                cmsState = JSON.parse(JSON.stringify(defaultCMSData));
+                saveCMSState(true);
+                renderApp();
+                closeConfirmModal();
+            };
+
+            document.getElementById('confirm-modal').classList.remove('hidden');
+        }
+
+        function closeConfirmModal() {
+            document.getElementById('confirm-modal').classList.add('hidden');
+        }
+
+        // Add / Edit Section Modal
+        function openSectionModal() {
+            document.getElementById('section-modal-title').textContent = 'Tambah Bagian Baru';
+            document.getElementById('form-section-id').value = '';
+            document.getElementById('form-title').value = '';
+            document.getElementById('form-badge').value = 'INFORMASI TERBARU';
+            document.getElementById('form-subtitle').value = '';
+            document.getElementById('form-visible').value = 'true';
+            document.getElementById('template-selector-group').classList.remove('hidden');
+
+            const defaultRadio = document.querySelector('input[name="sectionType"][value="social"]');
+            if (defaultRadio) defaultRadio.checked = true;
+
+            renderTemplateFormFields();
+            document.getElementById('section-modal').classList.remove('hidden');
+        }
+
+        function openEditSectionModal(secId) {
+            const sec = cmsState.sections.find(s => s.id === secId);
+            if (!sec) return;
+
+            document.getElementById('section-modal-title').textContent = `Edit Bagian: ${sec.title}`;
+            document.getElementById('form-section-id').value = sec.id;
+            document.getElementById('form-title').value = sec.title || '';
+            document.getElementById('form-badge').value = sec.badge || '';
+            document.getElementById('form-subtitle').value = sec.subtitle || '';
+            document.getElementById('form-visible').value = sec.visible === false ? 'false' : 'true';
+
+            const customTypes = ['social', 'schedule', 'contact', 'announcement'];
+            if (customTypes.includes(sec.type)) {
+                document.getElementById('template-selector-group').classList.remove('hidden');
+                const radio = document.querySelector(`input[name="sectionType"][value="${sec.type}"]`);
+                if (radio) radio.checked = true;
+                renderTemplateFormFields(sec);
+            } else {
+                // Built-in structured section (about / krida)
+                document.getElementById('template-selector-group').classList.add('hidden');
+                renderBuiltInStructuredFields(sec);
+            }
+
+            document.getElementById('section-modal').classList.remove('hidden');
+        }
+
+        function closeSectionModal() {
+            document.getElementById('section-modal').classList.add('hidden');
+        }
+
+        function renderBuiltInStructuredFields(sec) {
+            const container = document.getElementById('dynamic-template-fields');
+            if (sec.type === 'krida') {
+                container.innerHTML = `
+                    <p class="text-xs font-bold text-slate-700 uppercase">Daftar 4 Krida Saka Bhayangkara</p>
+                    <div class="space-y-3">
+                        ${(sec.items || []).map((item, idx) => `
+                            <div class="p-3 rounded-xl bg-white border border-slate-200 space-y-2">
+                                <span class="text-[11px] font-extrabold text-crimson-700">${escapeHTML(item.code)}</span>
+                                <input type="text" id="krida-name-${idx}" value="${escapeHTML(item.name)}" class="w-full px-3 py-1.5 rounded-lg border border-slate-300 text-sm font-bold">
+                                <textarea id="krida-desc-${idx}" rows="2" class="w-full px-3 py-1.5 rounded-lg border border-slate-300 text-xs">${escapeHTML(item.description)}</textarea>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+            } else if (sec.type === 'about') {
+                container.innerHTML = `
+                    <p class="text-xs font-bold text-slate-700 uppercase">Kartu Profil Utama</p>
+                    <div class="space-y-3">
+                        ${(sec.cards || []).map((card, idx) => `
+                            <div class="p-3 rounded-xl bg-white border border-slate-200 space-y-2">
+                                <input type="text" id="about-title-${idx}" value="${escapeHTML(card.title)}" class="w-full px-3 py-1.5 rounded-lg border border-slate-300 text-sm font-bold">
+                                <textarea id="about-desc-${idx}" rows="2" class="w-full px-3 py-1.5 rounded-lg border border-slate-300 text-xs">${escapeHTML(card.desc)}</textarea>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+            }
+        }
+
+        function renderTemplateFormFields(existingData = null) {
+            const selectedType = document.querySelector('input[name="sectionType"]:checked').value;
+            const container = document.getElementById('dynamic-template-fields');
+
+            if (selectedType === 'social') {
+                const ig = existingData?.socials?.[0]?.handle || '@sakabhayangkara_jatinegara';
+                const igUrl = existingData?.socials?.[0]?.url || 'https://instagram.com';
+                const wa = existingData?.socials?.[1]?.handle || '+62 812-8899-4510 (Dewan Saka)';
+                const waUrl = existingData?.socials?.[1]?.url || 'https://wa.me/6281288994510';
+                const yt = existingData?.socials?.[2]?.handle || 'Saka Bhayangkara Jatinegara';
+                const ytUrl = existingData?.socials?.[2]?.url || 'https://youtube.com';
+                const addr = existingData?.address || 'Sanggar Bakti: Polsek Jatinegara, Jl. Otista Raya No.1, Jakarta Timur';
+
+                container.innerHTML = `
+                    <p class="text-xs font-bold text-slate-700 uppercase">Konfigurasi Tautan Media Sosial</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-600 mb-1">Username Instagram</label>
+                            <input type="text" id="tpl-ig" value="${escapeHTML(ig)}" class="w-full px-3 py-2 rounded-lg border border-slate-300 text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-600 mb-1">URL Instagram</label>
+                            <input type="url" id="tpl-ig-url" value="${escapeHTML(igUrl)}" class="w-full px-3 py-2 rounded-lg border border-slate-300 text-sm">
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-600 mb-1">Kontak WhatsApp</label>
+                            <input type="text" id="tpl-wa" value="${escapeHTML(wa)}" class="w-full px-3 py-2 rounded-lg border border-slate-300 text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-600 mb-1">Link WhatsApp (wa.me)</label>
+                            <input type="url" id="tpl-wa-url" value="${escapeHTML(waUrl)}" class="w-full px-3 py-2 rounded-lg border border-slate-300 text-sm">
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-600 mb-1">Nama Kanal YouTube</label>
+                            <input type="text" id="tpl-yt" value="${escapeHTML(yt)}" class="w-full px-3 py-2 rounded-lg border border-slate-300 text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-600 mb-1">URL YouTube</label>
+                            <input type="url" id="tpl-yt-url" value="${escapeHTML(ytUrl)}" class="w-full px-3 py-2 rounded-lg border border-slate-300 text-sm">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-600 mb-1">Alamat Sekretariat</label>
+                        <input type="text" id="tpl-addr" value="${escapeHTML(addr)}" class="w-full px-3 py-2 rounded-lg border border-slate-300 text-sm">
+                    </div>
+                `;
+            } else if (selectedType === 'schedule') {
+                const day1 = existingData?.schedules?.[0]?.day || 'Sabtu';
+                const time1 = existingData?.schedules?.[0]?.time || '13.00 – 17.00 WIB';
+                const act1 = existingData?.schedules?.[0]?.activity || 'Latihan Rutin Materi Krida & PBB';
+                const loc1 = existingData?.schedules?.[0]?.location || 'Halaman Apel Polsek Jatinegara';
+
+                const day2 = existingData?.schedules?.[1]?.day || 'Minggu (Tentatif)';
+                const time2 = existingData?.schedules?.[1]?.time || '07.00 – 11.00 WIB';
+                const act2 = existingData?.schedules?.[1]?.activity || 'Bakti Masyarakat & Pengaturan Lalu Lintas';
+                const loc2 = existingData?.schedules?.[1]?.location || 'Wilayah Kecamatan Jatinegara';
+
+                container.innerHTML = `
+                    <p class="text-xs font-bold text-slate-700 uppercase">Daftar Jadwal Latihan</p>
+                    <div class="p-3 rounded-xl bg-white border border-slate-200 space-y-2.5">
+                        <span class="text-[11px] font-bold text-amber-700">Jadwal #1</span>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                            <input type="text" id="tpl-sch-day-0" value="${escapeHTML(day1)}" placeholder="Hari" class="w-full px-3 py-1.5 rounded-lg border border-slate-300 text-sm">
+                            <input type="text" id="tpl-sch-time-0" value="${escapeHTML(time1)}" placeholder="Jam" class="w-full px-3 py-1.5 rounded-lg border border-slate-300 text-sm">
+                        </div>
+                        <input type="text" id="tpl-sch-act-0" value="${escapeHTML(act1)}" placeholder="Materi Kegiatan" class="w-full px-3 py-1.5 rounded-lg border border-slate-300 text-sm">
+                        <input type="text" id="tpl-sch-loc-0" value="${escapeHTML(loc1)}" placeholder="Lokasi" class="w-full px-3 py-1.5 rounded-lg border border-slate-300 text-sm">
+                    </div>
+                    <div class="p-3 rounded-xl bg-white border border-slate-200 space-y-2.5">
+                        <span class="text-[11px] font-bold text-amber-700">Jadwal #2 (Opsional - kosongkan jika tidak perlu)</span>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                            <input type="text" id="tpl-sch-day-1" value="${escapeHTML(day2)}" placeholder="Hari" class="w-full px-3 py-1.5 rounded-lg border border-slate-300 text-sm">
+                            <input type="text" id="tpl-sch-time-1" value="${escapeHTML(time2)}" placeholder="Jam" class="w-full px-3 py-1.5 rounded-lg border border-slate-300 text-sm">
+                        </div>
+                        <input type="text" id="tpl-sch-act-1" value="${escapeHTML(act2)}" placeholder="Materi Kegiatan" class="w-full px-3 py-1.5 rounded-lg border border-slate-300 text-sm">
+                        <input type="text" id="tpl-sch-loc-1" value="${escapeHTML(loc2)}" placeholder="Lokasi" class="w-full px-3 py-1.5 rounded-lg border border-slate-300 text-sm">
+                    </div>
+                `;
+            } else if (selectedType === 'contact') {
+                const phone = existingData?.phone || '+62 812-8899-4510 (Humas Dewan Saka)';
+                const email = existingData?.email || 'sakabhayangkara.jatinegara@gmail.com';
+                const address = existingData?.address || 'Polsek Jatinegara, Jl. Otista Raya No.1, Bidara Cina, Jakarta Timur';
+
+                container.innerHTML = `
+                    <p class="text-xs font-bold text-slate-700 uppercase">Informasi Kontak & Lokasi Markas</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-600 mb-1">Nomor Telepon / WhatsApp</label>
+                            <input type="text" id="tpl-cnt-phone" value="${escapeHTML(phone)}" class="w-full px-3 py-2 rounded-lg border border-slate-300 text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-600 mb-1">Email Resmi</label>
+                            <input type="email" id="tpl-cnt-email" value="${escapeHTML(email)}" class="w-full px-3 py-2 rounded-lg border border-slate-300 text-sm">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-600 mb-1">Alamat Lengkap Pangkalan</label>
+                        <input type="text" id="tpl-cnt-addr" value="${escapeHTML(address)}" class="w-full px-3 py-2 rounded-lg border border-slate-300 text-sm">
+                    </div>
+                `;
+            } else {
+                const date = existingData?.date || new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
+                const content = existingData?.content || 'Penerimaan Anggota Baru Saka Bhayangkara Ranting Jatinegara dibuka untuk Pramuka Penegak dan Pandega se-Kecamatan Jatinegara. Silakan hadir langsung pada jadwal latihan rutin di Polsek Jatinegara.';
+
+                container.innerHTML = `
+                    <p class="text-xs font-bold text-slate-700 uppercase">Konten Pengumuman / Informasi</p>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-600 mb-1">Tanggal Pengumuman</label>
+                        <input type="text" id="tpl-ann-date" value="${escapeHTML(date)}" class="w-full px-3 py-2 rounded-lg border border-slate-300 text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-600 mb-1">Isi Pengumuman</label>
+                        <textarea id="tpl-ann-content" rows="4" class="w-full px-3 py-2 rounded-lg border border-slate-300 text-sm">${escapeHTML(content)}</textarea>
+                    </div>
+                `;
+            }
+        }
+
+        function handleSectionFormSubmit(e) {
+            e.preventDefault();
+            const existingId = document.getElementById('form-section-id').value;
+            const title = document.getElementById('form-title').value.trim();
+            const badge = document.getElementById('form-badge').value.trim() || 'INFORMASI';
+            const subtitle = document.getElementById('form-subtitle').value.trim();
+            const visible = document.getElementById('form-visible').value === 'true';
+
+            const existingSection = existingId ? cmsState.sections.find(s => s.id === existingId) : null;
+
+            // Handle built-in structured sections (about / krida)
+            if (existingSection && (existingSection.type === 'krida' || existingSection.type === 'about')) {
+                existingSection.title = title;
+                existingSection.badge = badge;
+                existingSection.subtitle = subtitle;
+                existingSection.visible = visible;
+
+                if (existingSection.type === 'krida') {
+                    existingSection.items.forEach((item, idx) => {
+                        item.name = document.getElementById(`krida-name-${idx}`).value.trim();
+                        item.description = document.getElementById(`krida-desc-${idx}`).value.trim();
+                    });
+                } else if (existingSection.type === 'about') {
+                    existingSection.cards.forEach((card, idx) => {
+                        card.title = document.getElementById(`about-title-${idx}`).value.trim();
+                        card.desc = document.getElementById(`about-desc-${idx}`).value.trim();
+                    });
+                }
+
+                saveCMSState(true);
+                closeSectionModal();
+                renderApp();
+                return;
+            }
+
+            const selectedType = document.querySelector('input[name="sectionType"]:checked').value;
+            const sectionObj = {
+                id: existingId || 'sec-custom-' + Date.now(),
+                type: selectedType,
+                visible,
+                badge,
+                title,
+                subtitle
+            };
+
+            if (selectedType === 'social') {
+                sectionObj.socials = [
+                    {
+                        platform: 'Instagram Resmi',
+                        handle: document.getElementById('tpl-ig').value.trim(),
+                        url: document.getElementById('tpl-ig-url').value.trim() || 'https://instagram.com',
+                        icon: 'fa-brands fa-instagram',
+                        color: 'from-pink-600 to-amber-600'
+                    },
+                    {
+                        platform: 'WhatsApp Sekretariat',
+                        handle: document.getElementById('tpl-wa').value.trim(),
+                        url: document.getElementById('tpl-wa-url').value.trim() || 'https://wa.me/',
+                        icon: 'fa-brands fa-whatsapp',
+                        color: 'from-emerald-600 to-teal-700'
+                    },
+                    {
+                        platform: 'YouTube Channel',
+                        handle: document.getElementById('tpl-yt').value.trim(),
+                        url: document.getElementById('tpl-yt-url').value.trim() || 'https://youtube.com',
+                        icon: 'fa-brands fa-youtube',
+                        color: 'from-red-600 to-rose-700'
+                    }
+                ];
+                sectionObj.address = document.getElementById('tpl-addr').value.trim();
+            } else if (selectedType === 'schedule') {
+                const schedules = [];
+                for (let i = 0; i < 2; i++) {
+                    const act = document.getElementById(`tpl-sch-act-${i}`).value.trim();
+                    if (act) {
+                        schedules.push({
+                            day: document.getElementById(`tpl-sch-day-${i}`).value.trim(),
+                            time: document.getElementById(`tpl-sch-time-${i}`).value.trim(),
+                            activity: act,
+                            location: document.getElementById(`tpl-sch-loc-${i}`).value.trim()
+                        });
+                    }
+                }
+                sectionObj.schedules = schedules;
+            } else if (selectedType === 'contact') {
+                sectionObj.phone = document.getElementById('tpl-cnt-phone').value.trim();
+                sectionObj.email = document.getElementById('tpl-cnt-email').value.trim();
+                sectionObj.address = document.getElementById('tpl-cnt-addr').value.trim();
+            } else {
+                sectionObj.date = document.getElementById('tpl-ann-date').value.trim();
+                sectionObj.content = document.getElementById('tpl-ann-content').value.trim();
+            }
+
+            if (existingId) {
+                const idx = cmsState.sections.findIndex(s => s.id === existingId);
+                if (idx !== -1) cmsState.sections[idx] = sectionObj;
+                showToast("Bagian berhasil diperbarui!", "success");
+            } else {
+                cmsState.sections.push(sectionObj);
+                showToast("Bagian baru berhasil ditambahkan ke halaman!", "success");
+            }
+
+            saveCMSState(false);
+            closeSectionModal();
+            renderApp();
+        }
+
+        // ==================== EXPORT STANDALONE HTML ====================
+        function exportCleanPublicHTML() {
+            try {
+                // Temporarily render pure public view before capturing outerHTML
+                const prevAuth = isAdminAuthenticated;
+                isAdminAuthenticated = false;
+                renderApp();
+
+                let htmlOutput = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+                const serializedCMS = JSON.stringify(cmsState, null, 4);
+
+                htmlOutput = htmlOutput.replace(
+                    /const defaultCMSData = \{[\s\S]*?\n        \};/,
+                    `const defaultCMSData = ${serializedCMS};`
+                );
+
+                // Sertakan hash sandi admin agar berlaku di situs yang dipublikasikan
+                htmlOutput = htmlOutput.replace(/const ADMIN_CRED_DEFAULT = [^;\n]*;/, () => 'const ADMIN_CRED_DEFAULT = ' + JSON.stringify(getActiveCredential()) + ';');
+
+                // Restore Admin session immediately
+                isAdminAuthenticated = prevAuth;
+                renderApp();
+
+                // Download file
+                const blob = new Blob([htmlOutput], { type: 'text/html;charset=utf-8' });
+                const url = URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = `saka-bhayangkara-jatinegara-publik-${new Date().toISOString().slice(0, 10)}.html`;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                URL.revokeObjectURL(url);
+
+                showToast("File HTML Publik berhasil diekspor & diunduh!", "success");
+            } catch (err) {
+                console.error(err);
+                showToast("Gagal mengekspor file HTML.", "error");
+            }
+        }
+
+        // ==================== UTILITIES ====================
+        function showToast(message, type = 'info') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+
+            const styles = {
+                success: 'bg-emerald-950 border-emerald-500 text-white',
+                error: 'bg-rose-950 border-rose-500 text-white',
+                info: 'bg-slate-900 border-amber-500 text-white'
+            };
+
+            const icons = {
+                success: 'fa-circle-check text-emerald-400',
+                error: 'fa-circle-exclamation text-rose-400',
+                info: 'fa-shield-halved text-amber-400'
+            };
+
+            toast.className = `pointer-events-auto flex items-center gap-3 px-4 py-3 rounded-xl border shadow-2xl text-xs sm:text-sm font-medium transition-all duration-300 ${styles[type] || styles.info}`;
+            toast.innerHTML = `<i class="fa-solid ${icons[type] || icons.info} text-base"></i><span>${escapeHTML(message)}</span>`;
+
+            container.appendChild(toast);
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transform = 'translateY(8px)';
+                setTimeout(() => toast.remove(), 300);
+            }, 3400);
+        }
+
+        function escapeHTML(str) {
+            if (typeof str !== 'string') return '';
+            return str
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#039;');
+        }
+
+        // Listen for URL hash changes (#admin <-> public)
+        window.addEventListener('hashchange', handleHashRouting);
+
+        // Initial Boot
+        document.addEventListener('DOMContentLoaded', () => {
+            handleHashRouting();
+        });
+    </script>
+</body>
+</html>
